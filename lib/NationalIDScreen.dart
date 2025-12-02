@@ -72,7 +72,9 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
                   // عنوان + زر مشاركة
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 12.0, vertical: 6),
+                      horizontal: 12.0,
+                      vertical: 6,
+                    ),
                     child: Row(
                       children: [
                         const Expanded(
@@ -95,7 +97,9 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
                       child: Center(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 12.0, vertical: 8),
+                            horizontal: 12.0,
+                            vertical: 8,
+                          ),
                           child: RepaintBoundary(
                             key: _paperKey,
                             child: _buildPaperView(), // هذا هو التصميم المطابق
@@ -116,8 +120,9 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
   // التقاط الـ Widget كصورة، ثم إنشاء PDF ومشاركة الملف
   Future<void> _captureAndSharePdf() async {
     try {
-      final boundary = _paperKey.currentContext?.findRenderObject()
-          as RenderRepaintBoundary?;
+      final boundary =
+          _paperKey.currentContext?.findRenderObject()
+              as RenderRepaintBoundary?;
 
       if (boundary == null) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -150,12 +155,7 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
         pw.Page(
           pageFormat: PdfPageFormat.a4,
           build: (ctx) {
-            return pw.Center(
-              child: pw.Image(
-                pwImage,
-                fit: pw.BoxFit.contain,
-              ),
-            );
+            return pw.Center(child: pw.Image(pwImage, fit: pw.BoxFit.contain));
           },
         ),
       );
@@ -163,19 +163,20 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
       // ⬇ حفظ ملف مؤقت
       final tempDir = await getTemporaryDirectory();
       final file = File(
-          '${tempDir.path}/national_id_${DateTime.now().millisecondsSinceEpoch}.pdf');
-
+        //'${tempDir.path}/national_id_${DateTime.now().millisecondsSinceEpoch}.pdf');
+        '${tempDir.path}/الهوية الوطنية${DateTime.now().millisecondsSinceEpoch}.pdf',
+      );
       await file.writeAsBytes(await pdfDoc.save());
 
       // ⬇ مشاركة
-      await Share.shareXFiles(
-        [XFile(file.path, mimeType: 'application/pdf')],
-        text: 'الهوية الوطنية (PDF)',
-      );
+      await Share.shareXFiles([
+        XFile(file.path, mimeType: 'application/pdf'),
+      ], text: 'الهوية الوطنية (PDF)');
     } catch (e, st) {
       debugPrint('Error capture/share PDF: $e\n$st');
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('حدث خطأ أثناء المشاركة: $e')));
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('حدث خطأ أثناء المشاركة: $e')));
     }
   }
 
@@ -297,10 +298,7 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 25),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16),
-              child: Image.asset(
-                "assets/022.png",
-                fit: BoxFit.cover,
-              ),
+              child: Image.asset("assets/022.png", fit: BoxFit.cover),
             ),
           ),
 
@@ -330,13 +328,21 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Text(e.key,
-                                  style: const TextStyle(
-                                      fontSize: 9, color: Colors.black54)),
+                              Text(
+                                e.key,
+                                style: const TextStyle(
+                                  fontSize: 9,
+                                  color: Colors.black54,
+                                ),
+                              ),
                               const SizedBox(height: 3),
-                              Text(e.value,
-                                  style: const TextStyle(
-                                      fontSize: 9, color: Colors.black54)),
+                              Text(
+                                e.value,
+                                style: const TextStyle(
+                                  fontSize: 9,
+                                  color: Colors.black54,
+                                ),
+                              ),
                             ],
                           ),
                         );
@@ -354,13 +360,21 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Text(e.key,
-                                  style: const TextStyle(
-                                      fontSize: 9, color: Colors.black54)),
+                              Text(
+                                e.key,
+                                style: const TextStyle(
+                                  fontSize: 9,
+                                  color: Colors.black54,
+                                ),
+                              ),
                               const SizedBox(height: 3),
-                              Text(e.value,
-                                  style: const TextStyle(
-                                      fontSize: 9, color: Colors.black54)),
+                              Text(
+                                e.value,
+                                style: const TextStyle(
+                                  fontSize: 9,
+                                  color: Colors.black54,
+                                ),
+                              ),
                             ],
                           ),
                         );
@@ -387,15 +401,19 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
-                      Text("تم مشاركة هذه الوثيقة من خلال توكلنا",
-                          style: TextStyle(fontSize: 11)),
+                      Text(
+                        "تم مشاركة هذه الوثيقة من خلال توكلنا",
+                        style: TextStyle(fontSize: 11),
+                      ),
                       SizedBox(height: 4),
-                      Text("This document is shared through",
-                          style:
-                              TextStyle(fontSize: 10, color: Colors.black54)),
-                      Text("Tawakkalna",
-                          style:
-                              TextStyle(fontSize: 10, color: Colors.black54)),
+                      Text(
+                        "This document is shared through",
+                        style: TextStyle(fontSize: 10, color: Colors.black54),
+                      ),
+                      Text(
+                        "Tawakkalna",
+                        style: TextStyle(fontSize: 10, color: Colors.black54),
+                      ),
                     ],
                   ),
                 ),
@@ -415,16 +433,20 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12.0),
       child: Column(
-        crossAxisAlignment:
-            alignRight ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        crossAxisAlignment: alignRight
+            ? CrossAxisAlignment.end
+            : CrossAxisAlignment.start,
         children: [
           Text(title, style: TextStyle(color: Colors.black54, fontSize: 13)),
           const SizedBox(height: 6),
-          Text(value,
-              style: const TextStyle(
-                  color: Colors.black87,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600)),
+          Text(
+            value,
+            style: const TextStyle(
+              color: Colors.black87,
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
         ],
       ),
     );
@@ -484,7 +506,8 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
                     GestureDetector(
                       onTap: _openShareSheet,
                       child: _circleButton(
-                          "assets/icons/share.png"), // أيقونة مشاركة صغيرة — استبدل بالـ asset الذي تريد
+                        "assets/icons/share.png",
+                      ), // أيقونة مشاركة صغيرة — استبدل بالـ asset الذي تريد
                     ),
                     const SizedBox(width: 10),
                     _circleButton("assets/icons/copy.png"),
@@ -525,15 +548,36 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
               const SizedBox(height: 20),
 
               // عناصر المعلومات (عرض سريع بدون التكرار الكامل لأن الورقة الكاملة داخل الـ sheet)
+              _item('نسخة', '5'),
+              Container(height: 1, color: Colors.white24),
+              const SizedBox(height: 4),
               _item('الاسم', 'رائد بن محمد بن إبراهيم إبراهيم'),
+              Container(height: 1, color: Colors.white24),
+              const SizedBox(height: 4),
               _item('رقم البطاقة', '1082319755'),
+              Container(height: 1, color: Colors.white24),
+              const SizedBox(height: 4),
               _item('تاريخ الميلاد بالهجري', '1412/10/14هـ'),
+              Container(height: 1, color: Colors.white24),
+              const SizedBox(height: 4),
               _item('تاريخ الانتهاء بالهجري', '1450/09/18هـ'),
+              Container(height: 1, color: Colors.white24),
+              const SizedBox(height: 4),
               _item('مكان الميلاد', 'جده'),
+              Container(height: 1, color: Colors.white24),
+              const SizedBox(height: 4),
               _item('الاسم بالإنجليزي', 'IBRAHIM, RAED MUHAMMED I'),
+              Container(height: 1, color: Colors.white24),
+              const SizedBox(height: 4),
               _item('رقم الهوية بالإنجليزي', '1082319755'),
+              Container(height: 1, color: Colors.white24),
+              const SizedBox(height: 4),
               _item('تاريخ الميلاد بالميلادي', '17/04/1992'),
+              Container(height: 1, color: Colors.white24),
+              const SizedBox(height: 4),
               _item('تاريخ الانتهاء بالميلادي', '02/02/2029'),
+              Container(height: 1, color: Colors.white24),
+              const SizedBox(height: 4),
 
               const SizedBox(height: 40),
             ],
@@ -561,23 +605,31 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
   Widget _item(String title, String value) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            children: const [
-              Icon(Icons.copy, color: Colors.white70, size: 22),
-              SizedBox(width: 8),
-            ],
+
+          Expanded(
+            //crossAxisAlignment: CrossAxisAlignment.start,
+            
+            child: // [
+              //const Icon(Icons.copy, color: Colors.white70, size: 22),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children:  [
+                  Text(title, style: const TextStyle(color: Colors.white70, fontSize: 14)),
+                  const SizedBox(height: 4),
+                  Text(value, style: const TextStyle(color: Colors.white, fontSize: 16)),
+                  //const SizedBox(height: 8),
+                ],
+              )  
+            //],
           ),
-          const SizedBox(height: 4),
-          Text(title,
-              style: const TextStyle(color: Colors.white70, fontSize: 14)),
-          const SizedBox(height: 4),
-          Text(value,
-              style: const TextStyle(color: Colors.white, fontSize: 16)),
-          const SizedBox(height: 8),
-          Container(height: 1, color: Colors.white24),
+          SizedBox(width: 8),
+          const Icon(Icons.copy, color: Colors.white70, size: 22),
+          //const SizedBox(height: 4),
+          //Container(height: 1, color: Colors.white24),
         ],
       ),
     );
