@@ -3,11 +3,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 //import 'NationalIDScreen.dart';
 //import 'PassportIDScreen.dart';
 //import 'NationalIDScreen1.dart';
-import 'tawakkalna_screen.dart';
-//import 'PassportIDScreen.dart';
-
+//import 'tawakkalna_screen.dart';
+import 'SplashScreen.dart';
 
 void main() => runApp(const MyApp());
+
 //const Color _accentColor = Color(0xFF7B8BFF);
 //const Color _indicatorColor = Color(0xFF6B7CFF);
 class MyApp extends StatelessWidget {
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
 
-      home: const TawakkalnaScreen(),
+      home: const SplashScreen(),
       /*theme: ThemeData(
         fontFamily: 'Tajawal', // الخط الافتراضي
       ),*/

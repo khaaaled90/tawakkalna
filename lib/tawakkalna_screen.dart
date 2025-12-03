@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'NationalIDScreen.dart';
+import 'DrivingDScreen.dart';
 import 'ProfileScreen.dart';
 
 class TawakkalnaScreen extends StatelessWidget {
@@ -50,10 +51,17 @@ class TawakkalnaScreen extends StatelessWidget {
                             radius: 23,
                             backgroundImage: AssetImage("assets/avatar.png"),
                           ),*/
-                        const CircleAvatar(
-                          radius: 23,
-                          backgroundColor: Colors.black12,
-                          child: Icon(Icons.favorite, color: Colors.black45),
+                        //const CircleAvatar(
+                        //radius: 23,
+                        //backgroundColor: Colors.black12,
+                        //child: Icon(Icons.favorite, color: Colors.black45),
+                        //),
+                        Image.asset(
+                          'assets/0xx2.png',
+                          width:
+                              40, // عرض الصورة (يمكن تعديله حسب الحجم المطلوب)
+                          height: 40, // ارتفاع الصورة
+                          fit: BoxFit.contain,
                         ),
                       ],
                     ),
@@ -94,6 +102,42 @@ class TawakkalnaScreen extends StatelessWidget {
                     ],
                   ),*/
                   SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Image.asset(
+                          "assets/fs0023.png",
+                          width: 100, // عرض الصورة
+                          height: 50, // ارتفاع الصورة
+                          fit: BoxFit.contain,
+                        ),
+                        const SizedBox(width: 10),
+                        Image.asset(
+                          "assets/fs0022.png",
+                          width: 100,
+                          height: 50,
+                          fit: BoxFit.contain,
+                        ),
+                        const SizedBox(width: 10),
+                        Image.asset(
+                          "assets/fs0021.png",
+                          width: 100,
+                          height: 50,
+                          fit: BoxFit.contain,
+                        ),
+                        const SizedBox(width: 10),
+                        Image.asset(
+                          "assets/fs0020.png",
+                          width: 100,
+                          height: 50,
+                          fit: BoxFit.contain,
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  /*SingleChildScrollView(
                     scrollDirection: Axis.horizontal, // تفعيل التمرير الأفقي
                     child: Row(
                       mainAxisAlignment:
@@ -106,7 +150,7 @@ class TawakkalnaScreen extends StatelessWidget {
                         // إضافة المزيد من العناصر حسب الحاجة
                       ],
                     ),
-                  ),
+                  ),*/
 
                   const SizedBox(height: 25),
 
@@ -160,21 +204,22 @@ class TawakkalnaScreen extends StatelessWidget {
                           );
                         }),
                         const SizedBox(width: 10),
+                        _cardButton("assets/023.png", () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => const DrivingDScreen()),
+                          );
+                        }),
+                        /*const SizedBox(width: 10),
                         _cardButton("assets/022.png", () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (_) => const NationalIDScreen()),
                           );
-                        }),
-                        const SizedBox(width: 10),
-                        _cardButton("assets/022.png", () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => const NationalIDScreen()),
-                          );
-                        }),
+                        }
+                        ),*/
                       ],
                     ),
                   ),
@@ -213,12 +258,16 @@ class TawakkalnaScreen extends StatelessWidget {
                   const SizedBox(height: 15),
 
                   Container(
+                    height: 180,
                     padding: const EdgeInsets.all(18),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      color: Colors.white,
+                      image: const DecorationImage(
+                        image: AssetImage('assets/fs007.png'), // مسار الصورة
+                        fit: BoxFit.contain, // لتملأ الخلفية بالكامل
+                      ),
                     ),
-                    child: Row(
+                    /*child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         _favoriteCenterItem(
@@ -227,7 +276,7 @@ class TawakkalnaScreen extends StatelessWidget {
                         _favoriteCenterItem(
                             "النتائج الدراسية\n ", Icons.school),
                       ],
-                    ),
+                    ),*/
                   ),
 
                   const SizedBox(height: 30),
@@ -285,12 +334,16 @@ class TawakkalnaScreen extends StatelessWidget {
                   const SizedBox(height: 10),
 
                   Container(
+                    height: 150,
                     padding: const EdgeInsets.all(18),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      color: Colors.white,
+                      image: const DecorationImage(
+                        image: AssetImage('assets/fs009.png'), // مسار الصورة
+                        fit: BoxFit.contain, // لتملأ الخلفية بالكامل
+                      ),
                     ),
-                    child: Row(
+                    /*child: Row(
                       children: const [
                         Icon(Icons.help_outline, size: 28),
                         SizedBox(width: 10),
@@ -302,7 +355,7 @@ class TawakkalnaScreen extends StatelessWidget {
                           ),
                         ),
                       ],
-                    ),
+                    ),*/
                   ),
 
                   const SizedBox(height: 50),
@@ -387,7 +440,7 @@ class TawakkalnaScreen extends StatelessWidget {
     );
   }
 */
-  Widget _gridCategories() {
+  /*Widget _gridCategories() {
     final items = [
       "الدينية",
       "الصحة",
@@ -398,9 +451,46 @@ class TawakkalnaScreen extends StatelessWidget {
       "التجارة والمالية",
       "السياحة والفعاليات",
       "التسوق والعقارات",
+    ];*/
+
+  Widget _gridCategories() {
+// مسارات الصور لكل عنصر
+    final imagePaths = [
+      "assets/fs0010.png", // الدينية
+      "assets/fs0011.png", // الشخصية والأسرة
+      "assets/fs0012.png", // الاتصالات والتقنية
+      "assets/fs0013.png", // المركبات والمرور
+      "assets/fs0014.png", // التعليم
+      "assets/fs0015.png", // التجارة والمالية
+      "assets/fs0016.png", // السياحة والفعاليات
+      "assets/fs0017.png",
+      "assets/fs0018.png",
+      //"assets/fs0019.png", // التسوق والعقارات
     ];
 
     return GridView.count(
+      crossAxisCount: 3,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      childAspectRatio: 1.1,
+      children: imagePaths
+          .map(
+            (path) => Container(
+              margin: const EdgeInsets.all(6),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: Image.asset(
+                  path,
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ),
+          )
+          .toList(),
+    );
+  }
+
+  /*return GridView.count(
       crossAxisCount: 3,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -419,7 +509,7 @@ class TawakkalnaScreen extends StatelessWidget {
               ))
           .toList(),
     );
-  }
+  }*/
 
   Widget _cardButton(String image, VoidCallback onTap) {
     return GestureDetector(

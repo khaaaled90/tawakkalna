@@ -1,0 +1,682 @@
+import 'dart:io';
+//import 'dart:typed_data';
+import 'dart:ui' as ui;
+import 'package:pdf/pdf.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:share_plus/share_plus.dart';
+
+class DrivingDScreen extends StatefulWidget {
+  const DrivingDScreen({super.key});
+
+  @override
+  State<DrivingDScreen> createState() => _DrivingDScreenState();
+}
+
+class _DrivingDScreenState extends State<DrivingDScreen> {
+  // مفتاح لالتقاط صورة للورقة (RepaintBoundary)
+  final GlobalKey _paperKey = GlobalKey();
+
+  // بيانات وهمية كما في الصورة — عدّلها إن أحببت
+  final Map<String, String> leftData = {
+    'الرقم/IN Number': '1082319755',
+    'الاسم بالانجليزي/Name': 'IBRAHIM, RAED MUHAMMED I',
+    'تاريخ الميلاد/Date Of Birth': '17/04/1992',
+    'تاريخ الاصدار/Date Issue': '14/07/2017',
+    'تاريخ الانتهاء بالهجري/Expire Date in Hijri': '1450/09/18هـ',
+    '': '',
+  };
+
+  final Map<String, String> rightData = {
+    'الاسم/Name in Arsbic': 'رائد بن محمد بن إبراهيم إبراهيم',
+    'مكان الميلاد/Place Of Pirrh': 'جده',
+    'تاريخ الميلاد بالهجري/Date of': '1412/10/14هـ',
+    'رقم الهوية بالانجليزي/ID Number io': '1082319755',
+    'تاريخ الانتهاء/Expire Date': '02/02/2029',
+    'نسخة/Copy': '5',
+  };
+
+  // فتح الـ Bottom Sheet (قابلة للسحب) التي تعرض الورقة
+  void _openShareSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return DraggableScrollableSheet(
+          initialChildSize: 0.78,
+          minChildSize: 0.5,
+          maxChildSize: 0.98,
+          expand: true,
+          builder: (context, scrollController) {
+            return Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+              ),
+              child: Column(
+                children: [
+                  const SizedBox(height: 8),
+                  Container(
+                    width: 60,
+                    height: 6,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                  ),
+                  // عنوان + زر مشاركة
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12.0,
+                      vertical: 6,
+                    ),
+                    child: Row(
+                      children: [
+                        const Expanded(
+                          child:
+                              SizedBox(), // يترك المساحة ليتوسط الزرين على اليمين
+                        ),
+                        IconButton(
+                          tooltip: 'مشاركة كملف PDF',
+                          icon: const Icon(Icons.share_outlined, size: 28),
+                          onPressed: () async {
+                            await _captureAndSharePdf();
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      controller: scrollController,
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12.0,
+                            vertical: 8,
+                          ),
+                          child: RepaintBoundary(
+                            key: _paperKey,
+                            child: _buildPaperView(), // هذا هو التصميم المطابق
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  // التقاط الـ Widget كصورة، ثم إنشاء PDF ومشاركة الملف
+  Future<void> _captureAndSharePdf() async {
+    try {
+      final boundary = _paperKey.currentContext?.findRenderObject()
+          as RenderRepaintBoundary?;
+
+      if (boundary == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('لم أجد الورقة لالتقاطها')),
+        );
+        return;
+      }
+
+      // 👇 مهم جداً — يجعل الكود يعمل على Web بدون الخطأ المعروف
+      final double ratio = kIsWeb ? 1.0 : 3.0;
+
+      final ui.Image image = await boundary.toImage(pixelRatio: ratio);
+
+      final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+
+      if (byteData == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('فشل تحويل الصورة إلى بايت')),
+        );
+        return;
+      }
+
+      final Uint8List pngBytes = byteData.buffer.asUint8List();
+
+      // ⬇ إنشاء PDF
+      final pdfDoc = pw.Document();
+      final pwImage = pw.MemoryImage(pngBytes);
+
+      pdfDoc.addPage(
+        pw.Page(
+          pageFormat: PdfPageFormat.a4,
+          build: (ctx) {
+            return pw.Center(child: pw.Image(pwImage, fit: pw.BoxFit.contain));
+          },
+        ),
+      );
+
+      // ⬇ حفظ ملف مؤقت
+      final tempDir = await getTemporaryDirectory();
+      final file = File(
+        //'${tempDir.path}/national_id_${DateTime.now().millisecondsSinceEpoch}.pdf');
+        '${tempDir.path}/رخصة قيادة${DateTime.now().millisecondsSinceEpoch}.pdf',
+      );
+      await file.writeAsBytes(await pdfDoc.save());
+
+      // ⬇ مشاركة
+      await Share.shareXFiles([
+        XFile(file.path, mimeType: 'application/pdf'),
+      ], text: 'رخصة قيادة (PDF)');
+    } catch (e, st) {
+      debugPrint('Error capture/share PDF: $e\n$st');
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('حدث خطأ أثناء المشاركة: $e')));
+    }
+  }
+
+  // هذا الويجت يبني "الورقة" بنفس شكل الصورة قدر الإمكان
+  Widget _buildPaperView() {
+    return Container(
+      color: Colors.white,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(height: 12),
+
+          // =================== HEADER ===================
+          Container(
+            height: 77,
+            //color: const Color(0xFF2B2B2B),
+            padding: const EdgeInsets.symmetric(horizontal: 14),
+            decoration: BoxDecoration(
+              // لو كنت تريد لون خلفية احتياطي يمكن وضعه هنا:
+              //color: const Color(0xFF2B2B2B),
+              image: const DecorationImage(
+                image: AssetImage('assets/vz223.png'), // اسم ملف الصورة الخلفية
+                fit: BoxFit
+                    .fill, // أو BoxFit.fill / BoxFit.fitWidth حسب الشكل المطلوب
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 10),
+
+          // =================== NATIONAL ID CARD IMAGE ===================
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Image.asset("assets/023.png", fit: BoxFit.cover),
+            ),
+          ),
+
+          const SizedBox(height: 10),
+
+          // =================== INFO BOX ===================
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              decoration: BoxDecoration(
+                color: const Color(0xFFF4F4F4),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // العمود العربي
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: rightData.entries.map((e) {
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                e.key,
+                                style: const TextStyle(
+                                  fontSize: 9,
+                                  color: Colors.black54,
+                                ),
+                              ),
+                              const SizedBox(height: 3),
+                              Text(
+                                e.value,
+                                style: const TextStyle(
+                                  fontSize: 9,
+                                  color: Colors.black54,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                  // العمود الإنجليزي
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: leftData.entries.map((e) {
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                e.key,
+                                style: const TextStyle(
+                                  fontSize: 9,
+                                  color: Colors.black54,
+                                ),
+                              ),
+                              const SizedBox(height: 3),
+                              Text(
+                                e.value,
+                                style: const TextStyle(
+                                  fontSize: 9,
+                                  color: Colors.black54,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                  //const SizedBox(width: 10),
+                ],
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 35),
+
+          // =================== FOOTER ===================
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Image.asset("assets/qr.png", width: 60, height: 60),
+                const SizedBox(width: 15),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        "تم مشاركة هذه الوثيقة من خلال توكلنا",
+                        style: TextStyle(fontSize: 11),
+                      ),
+                      SizedBox(height: 4),
+                      Text(
+                        "This document is shared through",
+                        style: TextStyle(fontSize: 10, color: Colors.black54),
+                      ),
+                      Text(
+                        "Tawakkalna",
+                        style: TextStyle(fontSize: 10, color: Colors.black54),
+                      ),
+                    ],
+                  ),
+                ),
+                //Image.asset("assets/qr.png", width: 90, height: 90),
+              ],
+            ),
+          ),
+
+          const SizedBox(height: 50),
+        ],
+      ),
+    );
+  }
+
+  // صف واحد من بيانات info (عنوان + قيمة)
+  Widget _infoRow(String title, String value, {bool alignRight = false}) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12.0),
+      child: Column(
+        crossAxisAlignment:
+            alignRight ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        children: [
+          Text(title, style: TextStyle(color: Colors.black54, fontSize: 13)),
+          const SizedBox(height: 6),
+          Text(
+            value,
+            style: const TextStyle(
+              color: Colors.black87,
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final now = DateTime.now();
+    final dateNow =
+        "${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}";
+
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          elevation: 0,
+          automaticallyImplyLeading: false,
+          title: const Text(
+            'رخصة قيادة',
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(left: 12),
+              child: GestureDetector(
+                onTap: () => Navigator.of(context).maybePop(),
+                child: const Icon(Icons.close, color: Colors.white, size: 30),
+              ),
+            ),
+          ],
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(height: 16),
+
+              // ===== بطاقة الهوية المصغرة المعروضة في الشاشة (ليست الورقة الكاملة) =====
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  //child: //Image.asset('assets/023.png', fit: BoxFit.cover),
+                  child: GestureDetector(
+                    onTap: () {
+                      showGeneralDialog(
+                        context: context,
+                        barrierDismissible: true,
+                        barrierLabel: '',
+                        barrierColor: Colors.black.withOpacity(0.60),
+                        transitionDuration: const Duration(milliseconds: 350),
+                        pageBuilder: (_, __, ___) {
+                          return const SizedBox.shrink();
+                        },
+                        transitionBuilder: (_, anim, __, ___) {
+                          final scale =
+                              Tween<double>(begin: 0.3, end: 1.0).animate(
+                            CurvedAnimation(
+                                parent: anim, curve: Curves.easeOutBack),
+                          );
+
+                          return Center(
+                            child: Opacity(
+                              opacity: anim.value,
+                              child: Transform.scale(
+                                scale: scale.value *
+                                    1.35, // ← هذا ما يجعل الصورة ضخمة
+                                child: Transform.rotate(
+                                  angle: 1.5708, // 90 درجة
+                                  child: Image.asset(
+                                    'assets/023.png',
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Image.asset('assets/023.png', fit: BoxFit.cover),
+                    ),
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 16),
+
+              // ==== الأزرار الدائرية (مشاركة، نسخ، نجمة) ====
+              Padding(
+                padding: const EdgeInsets.only(left: 14.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    // زر العرض/فتح الورقة + مشاركة
+                    GestureDetector(
+                      onTap: _openShareSheet,
+                      child: _circleButton(
+                        "assets/icons/share.png",
+                      ), // أيقونة مشاركة صغيرة — استبدل بالـ asset الذي تريد
+                    ),
+                    const SizedBox(width: 10),
+                    _circleButton("assets/icons/copy.png"),
+                    const SizedBox(width: 10),
+                    _circleButton("assets/icons/star.png"),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 16),
+
+              // QR + شعار (كما في كودك السابق)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const SizedBox(width: 18),
+                  Image.asset('assets/sa_logo.png', width: 180, height: 100),
+                  const SizedBox(width: 35),
+                  GestureDetector(
+                    onTap: () {
+                      showGeneralDialog(
+                        context: context,
+                        barrierDismissible: true,
+                        barrierLabel: '',
+                        barrierColor:
+                            Colors.black.withOpacity(0.60), // تغبيش الخلفية
+                        transitionDuration: const Duration(milliseconds: 300),
+                        pageBuilder: (_, __, ___) {
+                          return const SizedBox.shrink();
+                        },
+                        transitionBuilder: (_, anim, __, ___) {
+                          final scale =
+                              Tween<double>(begin: 0.4, end: 1.0).animate(
+                            CurvedAnimation(
+                                parent: anim, curve: Curves.easeOutBack),
+                          );
+
+                          return Center(
+                            child: Opacity(
+                              opacity: anim.value,
+                              child: AnimatedScale(
+                                scale: scale.value,
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.easeOutBack,
+                                child: Container(
+                                  width: 260, // ← الحجم الجديد بدل تكبير القديم
+                                  height: 360,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset('assets/qr.png',
+                                          width: 220, height: 220),
+                                      const SizedBox(height: 10),
+                                      Text(
+                                        dateNow,
+                                        style: const TextStyle(
+                                          fontSize: 26,
+                                          color: Colors.black, // لون نص ثابت
+                                          decoration: TextDecoration
+                                              .none, // إزالة أي خط أو تسطير
+                                          shadows: [], // إزالة أي ظل
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    child: Container(
+                      width: 130,
+                      height: 180,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset('assets/qr.png', width: 110, height: 110),
+                          const SizedBox(height: 8),
+                          Text(dateNow, style: const TextStyle(fontSize: 16)),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  /*Container(
+                    width: 130,
+                    height: 180,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset('assets/qr.png', width: 110, height: 110),
+                        const SizedBox(height: 8),
+                        Text(dateNow, style: const TextStyle(fontSize: 16)),
+                      ],
+                    ),
+                  ),*/
+                ],
+              ),
+
+              const SizedBox(height: 20),
+
+              // عناصر المعلومات (عرض سريع بدون التكرار الكامل لأن الورقة الكاملة داخل الـ sheet)
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text('  الخدمات المرتبطة',
+                      style: TextStyle(color: Colors.white70, fontSize: 14)),
+                ],
+              ),
+              const SizedBox(height: 4),
+
+              _item('الرقم', '1082319755'),
+              Container(height: 1, color: Colors.white24),
+              const SizedBox(height: 4),
+              _item('الاسم', 'رائد بن محمد بن إبراهيم إبراهيم'),
+              Container(height: 1, color: Colors.white24),
+              const SizedBox(height: 4),
+              _item('الاسم بالإنجليزي', 'IBRAHIM, RAED MUHAMMED I'),
+              Container(height: 1, color: Colors.white24),
+              const SizedBox(height: 4),
+              _item('الجنسية', 'المملكة العربية السعودية'),
+              Container(height: 1, color: Colors.white24),
+              const SizedBox(height: 4),
+              _item('القيود', 'بدون قيود'),
+              Container(height: 1, color: Colors.white24),
+              _item('تاريخ الميلاد', '17/04/1992'),
+              Container(height: 1, color: Colors.white24),
+              const SizedBox(height: 4),
+              _item('تاريخ الميلاد بالهجري', '1412/10/14هـ'),
+              Container(height: 1, color: Colors.white24),
+              const SizedBox(height: 4),
+              _item('تاريخ الاصدار', '17/03/2015'),
+              Container(height: 1, color: Colors.white24),
+              const SizedBox(height: 4),
+              _item('تاريخ الاصدار بالهجري', '1440/09/18هـ'),
+              Container(height: 1, color: Colors.white24),
+              const SizedBox(height: 4),
+              _item('تاريخ الانتهاء', '10/12/2028'),
+              Container(height: 1, color: Colors.white24),
+              const SizedBox(height: 4),
+              _item('تاريخ الانتهاء بالهجري', '1450/09/18هـ'),
+              Container(height: 1, color: Colors.white24),
+              const SizedBox(height: 4),
+              _item('فصيلة الدم', 'O+'),
+              Container(height: 1, color: Colors.white24),
+              const SizedBox(height: 4),
+
+              const SizedBox(height: 40),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _circleButton(String imagePath) {
+    return Container(
+      width: 56,
+      height: 56,
+      decoration: const BoxDecoration(
+        color: Color(0xFF2A2A2A),
+        shape: BoxShape.circle,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Image.asset(imagePath, fit: BoxFit.contain),
+      ),
+    );
+  }
+
+  Widget _item(String title, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+              //crossAxisAlignment: CrossAxisAlignment.start,
+
+              child: // [
+                  //const Icon(Icons.copy, color: Colors.white70, size: 22),
+                  Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(title,
+                  style: const TextStyle(color: Colors.white70, fontSize: 14)),
+              const SizedBox(height: 4),
+              Text(value,
+                  style: const TextStyle(color: Colors.white, fontSize: 16)),
+              //const SizedBox(height: 8),
+            ],
+          )
+              //],
+              ),
+          SizedBox(width: 8),
+          const Icon(Icons.copy, color: Colors.white70, size: 22),
+          //const SizedBox(height: 4),
+          //Container(height: 1, color: Colors.white24),
+        ],
+      ),
+    );
+  }
+}

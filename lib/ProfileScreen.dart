@@ -46,7 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                     // ===== خلفية الصورة =====
                     Positioned.fill(
                       child: Image.asset(
-                        "assets/header_bg1.png",
+                        "assets/header_bg.png",
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -155,76 +155,69 @@ class _ProfileScreenState extends State<ProfileScreen>
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 18),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // name - aligned to right
-                          Row(
+                          // الاسم
+                          const Row(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children: const [
-                              // Spacer(),
+                            children: [
                               Text(
                                 'رائد إبراهيم',
                                 style: TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.w600),
+                                textAlign: TextAlign.right,
                               ),
                             ],
                           ),
-                          const SizedBox(height: 8),
 
-                          // followers - id - placeholder spacing to match screenshot layout
+                          const SizedBox(height: 12),
+
+                          // المتابعون - رقم الهوية
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              // leftmost: followers (in screenshot it's left)
-
-                              // center: ID number (make it prominent)
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: const [
-                                  Text('رقم الهوية:1082319755',
-                                      style: TextStyle(
-                                          fontSize: 18, color: Colors.black54)),
-                                ],
+                              // رقم الهوية (يمين)
+                              const Text(
+                                'رقم الهوية: 1082319755',
+                                style: TextStyle(
+                                    fontSize: 18, color: Colors.black87),
                               ),
                               const Spacer(),
+                              // المتابعون (يسار)
                               GestureDetector(
                                 onTap: () {},
-                                child: Text('95 المتابعون',
-                                    style: TextStyle(
-                                        color: Colors.blue[700], fontSize: 16)),
+                                child: Text(
+                                  '95 المتابعون',
+                                  style: TextStyle(
+                                      color: Colors.blue, fontSize: 16),
+                                ),
                               ),
+                            ],
+                          ),
 
-                              const Spacer(flex: 2),
+                          const SizedBox(height: 16),
+
+                          // العمر + الدولة
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              _statBoxWithImage('المملكة العربية السعودية',
+                                  'assets/v333.png'),
+                              const SizedBox(width: 12),
+                              _statBoxWithImage('35', 'assets/v555.png'),
                             ],
                           ),
 
                           const SizedBox(height: 10),
 
-                          // stats row: age, country, birthdate, blood
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 2),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                _statBox(
-                                    'المملكة العربية السعودية', Icons.flag),
-                                const SizedBox(width: 7),
-                                _statBox('1992-04-17', Icons.calendar_today),
-                                //_statBox('35', Icons.cake),
-                                //_statBox('+0', Icons.opacity),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 7),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 6),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                _statBox('1992-04-17', Icons.calendar_today),
-                                const SizedBox(width: 60),
-                                _statBox('+0', Icons.opacity),
-                              ],
-                            ),
+                          // تاريخ الميلاد + فصيلة الدم
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              _statBoxWithImage(
+                                  '1992-04-17', 'assets/v222.png'),
+                              const SizedBox(width: 50),
+                              _statBoxWithImage('+0', 'assets/v444.png'),
+                            ],
                           ),
                         ],
                       ),
@@ -308,47 +301,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                       ),
                                     ),
                                   ),
-                                  /*Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 1),
-                                    child: Container(
-                                      height: 220,
-                                      decoration: BoxDecoration(
-                                        color: Colors.grey.shade200,
-                                        borderRadius: BorderRadius.circular(20),
-                                        image: const DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: AssetImage("assets/map2.png"),
-                                        ),
-                                      ),
-                                    ),
-                                  ),*/
 
                                   const SizedBox(height: 10),
-
-                                  // 🏷️ عنوان السكن
-                                  /*Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                      children: const [
-                                        Text(
-                                          "العنوان الأول",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 18
-                                          ),
-                                        ),
-                                        SizedBox(height: 6),
-                                        Text(
-                                          "الفقه، 3260، جدة، حي السيم، 2471 •2471\nNAF2471 · 643",
-                                          textAlign: TextAlign.right,
-                                          style: TextStyle(fontSize: 15, color: Colors.black87),
-                                        ),
-                                      ],
-                                    ),
-                                  ),*/
-
-                                  //const SizedBox(height: 20),
 
                                   // ☎️ رقم التواصل
                                   Padding(
@@ -454,65 +408,6 @@ class _ProfileScreenState extends State<ProfileScreen>
                                     ),
                                   ),
 
-                                  //const SizedBox(height: 10),
-
-                                  // البريد الإلكتروني
-                                  /*Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                                    child: Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(14),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Colors.black12, blurRadius: 6, offset: Offset(0, 2))
-                                        ],
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          //const Icon(Icons.email_outlined),
-                                          //const SizedBox(width: 16),
-                                          Expanded(
-                                            child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: const [
-                                                Text(
-                                                  "البريد الإلكتروني",
-                                                  style: TextStyle(color: Colors.black54, fontSize: 15),
-                                                ),
-                                                const SizedBox(width: 10),
-                                                Text(
-                                                  "لا يوجد",
-                                                  style: TextStyle(fontSize: 20, color: Colors.black54),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          const SizedBox(width: 16),
-                                          const Icon(Icons.email_outlined),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-
-                                  const SizedBox(height: 26),
-
-                                  // زر المزيد
-                                  Center(
-                                    child: TextButton(
-                                      onPressed: () { _showMoreSheet(context); },
-                                      child: const Text(
-                                        "المزيد",
-                                        style: TextStyle(
-                                          fontSize: 17,
-                                          color: Colors.blue,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    ),
-                                  ),*/
-
                                   const SizedBox(height: 11),
                                   // =======================  قسم المخالفات – السفر – الإنجازات  =======================
 
@@ -584,17 +479,6 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                   ),
                                                 ],
                                               ),
-                                              //),
-
-                                              // 🔵 السفر
-                                              //Container(
-                                              //  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                                              //  margin: const EdgeInsets.only(bottom: 12),
-                                              //  decoration: BoxDecoration(
-                                              //    color: Colors.white,
-                                              //    borderRadius: BorderRadius.circular(14),
-                                              //    boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 6)],
-                                              //  ),
                                               Row(
                                                 textDirection:
                                                     TextDirection.rtl,
@@ -640,17 +524,6 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                   ),
                                                 ],
                                               ),
-                                              //),
-
-                                              // 🟡 الإنجازات
-                                              //Container(
-                                              //  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                                              //  margin: const EdgeInsets.only(bottom: 12),
-                                              //  decoration: BoxDecoration(
-                                              //    color: Colors.white,
-                                              //    borderRadius: BorderRadius.circular(14),
-                                              //    boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 6)],
-                                              //  ),
                                               Row(
                                                 textDirection:
                                                     TextDirection.rtl,
@@ -925,23 +798,28 @@ class _ProfileScreenState extends State<ProfileScreen>
     );
   }
 
-  Widget _statBox(String label, IconData icon) {
+  Widget _statBoxWithImage(String label, String imagePath) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 6),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.grey.shade100,
+        color: Color(0xffffffff),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 18, color: Colors.green[700]),
+          Image.asset(
+            imagePath,
+            width: 20,
+            height: 20,
+            fit: BoxFit.contain,
+          ),
           const SizedBox(width: 6),
           Text(
             label,
             textAlign: TextAlign.right,
-            style: const TextStyle(fontSize: 13, color: Colors.black87),
+            style: const TextStyle(fontSize: 15, color: Colors.black87),
           ),
         ],
       ),
@@ -1032,7 +910,7 @@ void _showMoreSheet(BuildContext context) {
                     child: Padding(
                       padding: EdgeInsets.symmetric(vertical: 1),
                       child: Image.asset(
-                        "assets/gov_emblem1.png", // ضع الشعار في assets
+                        "assets/gov_emblem.png", // ضع الشعار في assets
                         width: 400,
                         height: 200,
                         fit: BoxFit.fill,
@@ -1040,47 +918,7 @@ void _showMoreSheet(BuildContext context) {
                     ),
                   ),
 
-                  //Row(
-                  //crossAxisAlignment: CrossAxisAlignment.center,
-                  //children: [
-                  // left: small toggle (مثل الصورة)
-                  /*Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade100,
-                          borderRadius: BorderRadius.circular(18),
-                        ),
-                        child: const Text('ع', style: TextStyle(fontWeight: FontWeight.bold)),
-                      ),
-                      const Spacer(),*/
-                  // logos (ضع صورك أو استبدل بأيقونات)
-
-                  //Image.asset('assets/gov_emblem.png', width: 110, height: 220),
-                  /*Row(
-                        children: [
-                          // قم بوضع asset image مناسبة في assets واستدعيها هنا
-                          //Image.asset('assets/gov_emblem.png', width: 110, height: 220),
-                          //const SizedBox(width: 10),
-                          //Image.asset('assets/absher_logo.png', width: 86, height: 46),
-                        ],
-                      ),*/
-                  //],
-                  //),
-
                   const SizedBox(height: 8),
-
-                  // ===== عنوان كبير =====
-                  /*Align(
-                    alignment: Alignment.centerRight,
-                    child: Text(
-                      'المعلومات الشخصية',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                  ),*/
-
-                  //const SizedBox(height: 8),
-
-                  // ===== قائمة البيانات (قابلة للتمرير) =====
 
                   Expanded(
                     //child:Directionality(
