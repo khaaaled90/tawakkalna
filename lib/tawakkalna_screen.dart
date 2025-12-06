@@ -1,9 +1,13 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'NationalIDScreen.dart';
 import 'DrivingDScreen.dart';
 import 'ProfileScreen.dart';
+import 'ToggleBlurCard.dart';
+import 'tawakkalna_bottom_bar.dart';
 
 class TawakkalnaScreen extends StatelessWidget {
   const TawakkalnaScreen({super.key});
@@ -172,12 +176,19 @@ class TawakkalnaScreen extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
+                          TawakkalnaHome.globalKey.currentState?.changeTab(4);
+                        },
+                        //child: Text("عرض معلوماتي"),
+                        //),
+                        //GestureDetector(
+                        /*onTap: () {
+                          //TawakkalnaHome.of(context).changeTab(4);
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (_) => const ProfileScreen()),
                           );
-                        },
+                        },*/
                         child: const Text(
                           "عرض الكل",
                           style: TextStyle(
@@ -196,7 +207,36 @@ class TawakkalnaScreen extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: [
-                        _cardButton("assets/022.png", () {
+                        ToggleBlurCard(
+                          imagePath: "assets/022.png",
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => const NationalIDScreen()),
+                            );
+                          },
+                        ),
+                        const SizedBox(width: 10),
+                        ToggleBlurCard(
+                          imagePath: "assets/023.png",
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => const DrivingDScreen()),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  /*SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        ToggleBlurCard("assets/022.png", () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -204,7 +244,7 @@ class TawakkalnaScreen extends StatelessWidget {
                           );
                         }),
                         const SizedBox(width: 10),
-                        _cardButton("assets/023.png", () {
+                        ToggleBlurCard("assets/023.png", () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -222,7 +262,7 @@ class TawakkalnaScreen extends StatelessWidget {
                         ),*/
                       ],
                     ),
-                  ),
+                  ),*/
 
                   /*Row(
                 
@@ -364,7 +404,7 @@ class TawakkalnaScreen extends StatelessWidget {
             ),
           ),
         ),
-        bottomNavigationBar: _bottomNav(),
+        //bottomNavigationBar: _bottomNav(),
       ),
     );
   }
@@ -511,7 +551,56 @@ class TawakkalnaScreen extends StatelessWidget {
     );
   }*/
 
+//  import 'dart:ui';
+//
+//
   Widget _cardButton(String image, VoidCallback onTap) {
+    return StatefulBuilder(
+      builder: (context, setState) {
+        bool isBlurred = false;
+
+        return GestureDetector(
+          onTap: onTap,
+          onLongPress: () {
+            setState(() {
+              isBlurred = !isBlurred; // تشغيل / إطفاء الضبابية
+            });
+          },
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: Stack(
+              children: [
+                // الصورة
+                Image.asset(
+                  image,
+                  width: 150,
+                  height: 100,
+                  fit: BoxFit.cover,
+                ),
+
+                // الضبابية
+                if (isBlurred)
+                  ClipRect(
+                    // مهم جداً لكي يعمل الـ BackdropFilter
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+                      child: Container(
+                        width: 150,
+                        height: 100,
+                        color:
+                            Colors.black.withOpacity(0.15), // تعتيم بسيط + Blur
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  /*Widget _cardButton(String image, VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -526,7 +615,7 @@ class TawakkalnaScreen extends StatelessWidget {
         ),
       ),
     );
-  }
+  }*/
 
   Widget _favoriteCenterItem(String text, IconData icon) {
     return Column(
@@ -653,11 +742,15 @@ class TawakkalnaScreen extends StatelessWidget {
                                           content: Text("تم نسخ العنوان")),
                                     );
                                   },
-                                  icon: const Icon(Icons.share),
+                                  icon: const Icon(Icons.share,
+                                      color: Colors.white),
                                   label: const Padding(
                                     padding: EdgeInsets.symmetric(vertical: 14),
                                     child: Text("مشاركة عنوانك",
-                                        style: TextStyle(fontSize: 16)),
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color: Colors.white,
+                                        )),
                                   ),
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.black,
@@ -730,19 +823,4 @@ class TawakkalnaScreen extends StatelessWidget {
   }
 
   Widget _divider() => Divider(color: Colors.grey[300], height: 1);
-
-  Widget _bottomNav() {
-    return BottomNavigationBar(
-      selectedItemColor: Colors.green,
-      unselectedItemColor: Colors.grey,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: "مبوماتي"),
-        BottomNavigationBarItem(icon: Icon(Icons.message), label: "الرسائل"),
-        BottomNavigationBarItem(icon: Icon(Icons.apps), label: "الخدمات"),
-        BottomNavigationBarItem(icon: Icon(Icons.map), label: "واكب"),
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: "توكلنا"),
-      ],
-      type: BottomNavigationBarType.fixed,
-    );
-  }
 }

@@ -3,7 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 //import 'NationalIDScreen.dart';
 //import 'PassportIDScreen.dart';
 //import 'NationalIDScreen1.dart';
-//import 'tawakkalna_screen.dart';
+import 'tawakkalna_screen.dart';
 import 'SplashScreen.dart';
 
 void main() => runApp(const MyApp());

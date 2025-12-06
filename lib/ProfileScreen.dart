@@ -3,7 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-//import 'NationalIDScreen.dart';
+import 'DrivingDScreen.dart';
+import 'NationalIDScreen.dart';
+
+import 'PassportIDScreen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -585,20 +588,39 @@ class _ProfileScreenState extends State<ProfileScreen>
                           SingleChildScrollView(
                             child: Column(
                               children: [
-                                _sectionTitle('المركبات'),
-                                const SizedBox(height: 12),
+                                //_sectionTitle('المركبات'),
+                                const SizedBox(height: 5),
                                 SizedBox(
                                   height: 210,
                                   child: ListView(
-                                    scrollDirection: Axis.vertical,
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 16),
+                                        horizontal: 10),
                                     children: [
-                                      _imageCard("assets/driving_license.png",
-                                          width: 320),
-                                      const SizedBox(width: 12),
-                                      _imageCard("assets/id_card.png",
-                                          width: 320),
+                                      _imageCard(
+                                        "assets/id_card.png",
+                                        width: 320,
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (_) =>
+                                                    NationalIDScreen()),
+                                          );
+                                        },
+                                      ),
+                                      const SizedBox(height: 12),
+                                      _imageCard(
+                                        "assets/driving_license.png",
+                                        width: 320,
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (_) =>
+                                                    DrivingDScreen()),
+                                          );
+                                        },
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -606,7 +628,6 @@ class _ProfileScreenState extends State<ProfileScreen>
                               ],
                             ),
                           ),
-
                           // مستنداتي
                           // ===================== تبويب مستنداتي =====================
                           SingleChildScrollView(
@@ -628,9 +649,68 @@ class _ProfileScreenState extends State<ProfileScreen>
                                       ),
                                     ),
                                   ),
-
                                   // ---------- كرت الجواز ----------
-                                  Container(
+                                  InkWell(
+                                    borderRadius: BorderRadius.circular(22),
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                PassportDetails()),
+                                      );
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.all(18),
+                                      margin:
+                                          EdgeInsets.symmetric(horizontal: 16),
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey.shade100,
+                                        borderRadius: BorderRadius.circular(22),
+                                      ),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          RotatedBox(
+                                            quarterTurns: 3,
+                                            child: Text(
+                                              "V872997",
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                color: Colors.black87,
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(width: 20),
+                                          RotatedBox(
+                                            quarterTurns: 3,
+                                            child: Text(
+                                              "رائد بن محمد بن ابراهيم ابراهيم",
+                                              style: TextStyle(
+                                                  fontSize: 18, height: 1.3),
+                                            ),
+                                          ),
+                                          SizedBox(width: 70),
+                                          Container(
+                                            width: 150,
+                                            height: 180,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(16),
+                                              color: Colors.white,
+                                            ),
+                                            child: Image.asset(
+                                              "assets/passport_sample.png",
+                                              fit: BoxFit.fill,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+
+                                  /*Container(
                                     padding: EdgeInsets.all(18),
                                     margin:
                                         EdgeInsets.symmetric(horizontal: 16),
@@ -663,10 +743,10 @@ class _ProfileScreenState extends State<ProfileScreen>
                                           ),
                                         ),
                                         // --- صورة الجواز (يسار) ---
-                                        SizedBox(width: 20),
+                                        SizedBox(width: 70),
                                         Container(
-                                          width: 120,
-                                          height: 150,
+                                          width: 150,
+                                          height: 180,
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(16),
@@ -674,12 +754,12 @@ class _ProfileScreenState extends State<ProfileScreen>
                                           ),
                                           child: Image.asset(
                                             "assets/passport_sample.png",
-                                            fit: BoxFit.cover,
+                                            fit: BoxFit.fill,
                                           ),
                                         ),
                                       ],
                                     ),
-                                  ),
+                                  ),*/
 
                                   SizedBox(height: 10),
                                 ],
@@ -750,7 +830,7 @@ class _ProfileScreenState extends State<ProfileScreen>
           ],
         ),
       ),
-      bottomNavigationBar: _bottomNav(),
+      //bottomNavigationBar: _bottomNav(),
     );
   }
 
@@ -765,36 +845,28 @@ class _ProfileScreenState extends State<ProfileScreen>
     );
   }
 
-  Widget _imageCard(String asset, {double width = 300}) {
-    return Container(
-      width: width,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(18),
-        boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 8)],
+  Widget _imageCard(
+    String asset, {
+    double width = 300,
+    VoidCallback? onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: width,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(18),
+        ),
+        padding: const EdgeInsets.all(4),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: Image.asset(
+            asset,
+            fit: BoxFit.cover,
+          ),
+        ),
       ),
-      padding: const EdgeInsets.all(8),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(12),
-        child: Image.asset(asset, fit: BoxFit.cover),
-      ),
-    );
-  }
-
-  Widget _bottomNav() {
-    return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      currentIndex: 0,
-      selectedItemColor: Colors.black87,
-      unselectedItemColor: Colors.black45,
-      showUnselectedLabels: true,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.folder), label: 'معلوماتي'),
-        BottomNavigationBarItem(icon: Icon(Icons.message), label: 'الرسائل'),
-        BottomNavigationBarItem(icon: Icon(Icons.grid_view), label: 'الخدمات'),
-        BottomNavigationBarItem(icon: Icon(Icons.article), label: 'واكب'),
-        BottomNavigationBarItem(icon: Icon(Icons.people), label: 'توكّلنا'),
-      ],
     );
   }
 
@@ -1173,11 +1245,15 @@ void _showNationalAddressSheet(BuildContext context) {
                                         content: Text("تم نسخ العنوان")),
                                   );
                                 },
-                                icon: const Icon(Icons.share),
+                                icon: const Icon(Icons.share,
+                                    color: Colors.white),
                                 label: const Padding(
                                   padding: EdgeInsets.symmetric(vertical: 14),
                                   child: Text("مشاركة عنوانك",
-                                      style: TextStyle(fontSize: 16)),
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.white,
+                                      )),
                                 ),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.black,
