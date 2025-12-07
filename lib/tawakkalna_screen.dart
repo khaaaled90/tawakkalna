@@ -42,7 +42,7 @@ class TawakkalnaScreen extends StatelessWidget {
                         const SizedBox(width: 12),
                         const Expanded(
                           child: Text(
-                            "هلا رائد!\nWeather - حدد مدينتك المفضلة",
+                            "هلا فيصل!\nWeather - حدد مدينتك المفضلة",
                             style: TextStyle(
                               fontSize: 16,
                               height: 1.4,

@@ -23,21 +23,21 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
 
   // بيانات وهمية كما في الصورة — عدّلها إن أحببت
   final Map<String, String> leftData = {
-    'الرقم/IN Number': '1082319755',
-    'الاسم بالانجليزي/Name': 'IBRAHIM, RAED MUHAMMED I',
-    'تاريخ الميلاد/Date Of Birth': '17/04/1992',
-    'تاريخ الاصدار/Date Issue': '14/07/2017',
-    'تاريخ الانتهاء بالهجري/Expire Date in Hijri': '1450/09/18هـ',
+    'الرقم/IN Number': '2120808866',
+    'الاسم بالانجليزي/Name': 'FAISAL ABDULLAH ABDU QAYID',
+    'تاريخ الميلاد/Date Of Birth': '20/01/1995',
+    'تاريخ الاصدار/Date Issue': '14/07/2015',
+    //'تاريخ الانتهاء بالهجري/Expire Date in Hijri': '1450/09/18هـ',
     '': '',
   };
 
   final Map<String, String> rightData = {
-    'الاسم/Name in Arsbic': 'رائد بن محمد بن إبراهيم إبراهيم',
+    'الاسم/Name in Arsbic': 'فيصل عبدالله عبده قايد',
     'مكان الميلاد/Place Of Pirrh': 'جده',
-    'تاريخ الميلاد بالهجري/Date of': '1412/10/14هـ',
-    'رقم الهوية بالانجليزي/ID Number io': '1082319755',
-    'تاريخ الانتهاء/Expire Date': '02/02/2029',
-    'نسخة/Copy': '5',
+    //'تاريخ الميلاد بالهجري/Date of': '1412/10/14هـ',
+    'رقم الهوية بالانجليزي/ID Number io': '2120808866',
+    'تاريخ الانتهاء/Expire Date': '06/06/2026',
+    'نسخة/Copy': '8',
   };
 
   // فتح الـ Bottom Sheet (قابلة للسحب) التي تعرض الورقة
@@ -587,41 +587,41 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
               ),
               const SizedBox(height: 4),
 
-              _item('الرقم', '1082319755'),
+              _item('الرقم', '2120808866'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              _item('الاسم', 'رائد بن محمد بن إبراهيم إبراهيم'),
+              _item('الاسم', 'فيصل عبدالله عبده قايد'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              _item('الاسم بالإنجليزي', 'IBRAHIM, RAED MUHAMMED I'),
+              _item('الاسم بالإنجليزي', 'FAISAL ABDULLAH ABDU QAYID'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              _item('الجنسية', 'المملكة العربية السعودية'),
+              _item('الجنسية', 'اليمن'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
               _item('القيود', 'بدون قيود'),
               Container(height: 1, color: Colors.white24),
-              _item('تاريخ الميلاد', '17/04/1992'),
+              _item('تاريخ الميلاد', '20/01/1995'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              _item('تاريخ الميلاد بالهجري', '1412/10/14هـ'),
+              /*_item('تاريخ الميلاد بالهجري', '1412/10/14هـ'),
               Container(height: 1, color: Colors.white24),
-              const SizedBox(height: 4),
+              const SizedBox(height: 4),*/
               _item('تاريخ الاصدار', '17/03/2015'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              _item('تاريخ الاصدار بالهجري', '1440/09/18هـ'),
+              /*_item('تاريخ الاصدار بالهجري', '1440/09/18هـ'),
+              Container(height: 1, color: Colors.white24),
+              const SizedBox(height: 4),*/
+              _item('تاريخ الانتهاء', '06/06/2026'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              _item('تاريخ الانتهاء', '10/12/2028'),
+              /*_item('تاريخ الانتهاء بالهجري', '1450/09/18هـ'),
               Container(height: 1, color: Colors.white24),
-              const SizedBox(height: 4),
-              _item('تاريخ الانتهاء بالهجري', '1450/09/18هـ'),
+              const SizedBox(height: 4),*/
+              /*_item('فصيلة الدم', 'O+'),
               Container(height: 1, color: Colors.white24),
-              const SizedBox(height: 4),
-              _item('فصيلة الدم', 'O+'),
-              Container(height: 1, color: Colors.white24),
-              const SizedBox(height: 4),
+              const SizedBox(height: 4),*/
 
               const SizedBox(height: 40),
             ],

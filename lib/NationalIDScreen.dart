@@ -23,21 +23,21 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
 
   // بيانات وهمية كما في الصورة — عدّلها إن أحببت
   final Map<String, String> leftData = {
-    'الرقم/IN Number': '1082319755',
-    'الاسم بالانجليزي/Name': 'IBRAHIM, RAED MUHAMMED I',
-    'تاريخ الميلاد/Date Of Birth': '17/04/1992',
-    'تاريخ الاصدار/Date Issue': '14/07/2017',
-    'تاريخ الانتهاء بالهجري/Expire Date in Hijri': '1450/09/18هـ',
+    'الرقم/IN Number': '2120808866',
+    'الاسم بالانجليزي/Name': 'FAISAL ABDULLAH ABDU QAYID',
+    'تاريخ الميلاد/Date Of Birth': '20/01/1995',
+    'تاريخ الاصدار/Date Issue': '14/07/2015',
+    //'تاريخ الانتهاء بالهجري/Expire Date in Hijri': '1450/09/18هـ',
     '': '',
   };
 
   final Map<String, String> rightData = {
-    'الاسم/Name in Arsbic': 'رائد بن محمد بن إبراهيم إبراهيم',
+    'الاسم/Name in Arsbic': 'فيصل عبدالله عبده قايد',
     'مكان الميلاد/Place Of Pirrh': 'جده',
-    'تاريخ الميلاد بالهجري/Date of': '1412/10/14هـ',
-    'رقم الهوية بالانجليزي/ID Number io': '1082319755',
-    'تاريخ الانتهاء/Expire Date': '02/02/2029',
-    'نسخة/Copy': '5',
+    //'تاريخ الميلاد بالهجري/Date of': '1412/10/14هـ',
+    'رقم الهوية بالانجليزي/ID Number io': '2120808866',
+    'تاريخ الانتهاء/Expire Date': '06/06/2026',
+    'نسخة/Copy': '8',
   };
 
   // فتح الـ Bottom Sheet (قابلة للسحب) التي تعرض الورقة
@@ -642,34 +642,34 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
               const SizedBox(height: 20),
 
               // عناصر المعلومات (عرض سريع بدون التكرار الكامل لأن الورقة الكاملة داخل الـ sheet)
-              _item('نسخة', '5'),
+              _item('نسخة', '8'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              _item('الاسم', 'رائد بن محمد بن إبراهيم إبراهيم'),
+              _item('الاسم', 'فيصل عبدالله عبده قايد'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              _item('رقم البطاقة', '1082319755'),
+              _item('رقم البطاقة', '2120808866'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              _item('تاريخ الميلاد بالهجري', '1412/10/14هـ'),
+              /*_item('تاريخ الميلاد بالهجري', '1412/10/14هـ'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
               _item('تاريخ الانتهاء بالهجري', '1450/09/18هـ'),
               Container(height: 1, color: Colors.white24),
-              const SizedBox(height: 4),
+              const SizedBox(height: 4),*/
               _item('مكان الميلاد', 'جده'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              _item('الاسم بالإنجليزي', 'IBRAHIM, RAED MUHAMMED I'),
+              _item('الاسم بالإنجليزي', 'FAISAL ABDULLAH ABDU QAYID'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              _item('رقم الهوية بالإنجليزي', '1082319755'),
+              _item('رقم الهوية بالإنجليزي', '2120808866'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              _item('تاريخ الميلاد بالميلادي', '17/04/1992'),
+              _item('تاريخ الميلاد بالميلادي', '20/01/1995'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              _item('تاريخ الانتهاء بالميلادي', '02/02/2029'),
+              _item('تاريخ الانتهاء بالميلادي', '06/06/2026'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
 
