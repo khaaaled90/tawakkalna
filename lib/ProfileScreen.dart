@@ -219,7 +219,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                               _statBoxWithImage(
                                   '1992-04-17', 'assets/v222.png'),
                               const SizedBox(width: 50),
-                              _statBoxWithImage('+0', 'assets/v444.png'),
+                              _statBoxWithImage('+A', 'assets/v444.png'),
                             ],
                           ),
                         ],

@@ -619,9 +619,9 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
               /*_item('تاريخ الانتهاء بالهجري', '1450/09/18هـ'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),*/
-              /*_item('فصيلة الدم', 'O+'),
+              _item('فصيلة الدم', 'O+'),
               Container(height: 1, color: Colors.white24),
-              const SizedBox(height: 4),*/
+              const SizedBox(height: 4),
 
               const SizedBox(height: 40),
             ],
