@@ -1042,10 +1042,10 @@ void _showMoreSheet(BuildContext context) {
                             }),
                         _sheetRow(
                             label: 'الحالة الاجتماعية',
-                            value: 'متزوج',
+                            value: 'اعزب',
                             onCopy: () {
                               Clipboard.setData(
-                                  const ClipboardData(text: 'متزوج'));
+                                  const ClipboardData(text: 'اعزب'));
                               ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(content: Text('تم النسخ')));
                             }),
