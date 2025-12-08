@@ -171,7 +171,7 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
                 alignment: pw.Alignment.center,
                 child: pw.Image(
                   pwImage,
-                  fit: pw.BoxFit.contain,     // ❗ لا قص ولا تمدد، ويحافظ على النسبة
+                  fit: pw.BoxFit.fill,     // ❗ لا قص ولا تمدد، ويحافظ على النسبة
                   width: pageWidth,           // نجبر الصورة على أكبر مساحة ممكنة
                   height: pageHeight,
                   alignment: pw.Alignment.center,
