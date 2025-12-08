@@ -158,6 +158,19 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
       pdfDoc.addPage(
         pw.Page(
           pageFormat: PdfPageFormat.a4,
+          margin: pw.EdgeInsets.zero,
+          build: (ctx) {
+            return pw.Image(
+              pwImage,
+              fit: pw.BoxFit.cover,
+            );
+          },
+        ),
+      );
+
+      /*pdfDoc.addPage(
+        pw.Page(
+          pageFormat: PdfPageFormat.a4,
           margin: pw.EdgeInsets.zero, // إلغاء الهوامش
           build: (ctx) {
             return pw.Container(
@@ -165,12 +178,12 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
               height: double.infinity,
               child: pw.Image(
                 pwImage,
-                fit: pw.BoxFit.cover, // الصورة تملأ الصفحة بالكامل
+                fit: pw.BoxFit.contain, // الصورة تملأ الصفحة بالكامل
               ),
             );
           },
         ),
-      );
+      );*/
 
       /*pdfDoc.addPage(
         pw.Page(

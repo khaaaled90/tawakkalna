@@ -148,7 +148,20 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
       final pdfDoc = pw.Document();
       final pwImage = pw.MemoryImage(pngBytes);
 
-      pdfDoc.addPage(
+            pdfDoc.addPage(
+        pw.Page(
+          pageFormat: PdfPageFormat.a4,
+          margin: pw.EdgeInsets.zero,
+          build: (ctx) {
+            return pw.Image(
+              pwImage,
+              fit: pw.BoxFit.cover,
+            );
+          },
+        ),
+      );
+
+      /*pdfDoc.addPage(
         pw.Page(
           pageFormat: PdfPageFormat.a4,
           margin: pw.EdgeInsets.zero, // إلغاء الهوامش
@@ -163,7 +176,7 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
             );
           },
         ),
-      );
+      );*/
       /*pdfDoc.addPage(
         pw.Page(
           pageFormat: PdfPageFormat.a4,
