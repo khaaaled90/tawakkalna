@@ -158,7 +158,7 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
               height: double.infinity,
               child: pw.Image(
                 pwImage,
-                fit: pw.BoxFit.fill, // الصورة تملأ الصفحة بالكامل
+                fit: pw.BoxFit.contain, // الصورة تملأ الصفحة بالكامل
               ),
             );
           },

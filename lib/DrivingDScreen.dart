@@ -165,7 +165,7 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
               height: double.infinity,
               child: pw.Image(
                 pwImage,
-                fit: pw.BoxFit.fill, // الصورة تملأ الصفحة بالكامل
+                fit: pw.BoxFit.contain, // الصورة تملأ الصفحة بالكامل
               ),
             );
           },
