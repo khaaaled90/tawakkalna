@@ -107,7 +107,8 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
                           ),
                           child: RepaintBoundary(
                             key: _paperKey,
-                            child: _buildPaperView(), // هذا هو التصميم المطابق
+                            child: _buildA4Paper(),
+                            //child: _buildPaperView(), // هذا هو التصميم المطابق
                           ),
                         ),
                       ),
@@ -231,7 +232,145 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
       ).showSnackBar(SnackBar(content: Text('حدث خطأ أثناء المشاركة: $e')));
     }
   }
+  Widget _buildA4Paper() {
+    const double ratio = 3.0; // دقة عالية للطباعة
 
+    // أبعاد A4 بالنقاط × نسبة الجودة
+    final double width = 595 * ratio;
+    final double height = 842 * ratio;
+
+    return Center(
+      child: RepaintBoundary(
+        key: _paperKey,
+        child: Container(
+          width: width,
+          height: height,
+          color: Colors.white,
+          child: _buildPaperContent(), // محتوى البطاقة بالكامل
+        ),
+      ),
+    );
+  }
+  Widget _buildPaperContent() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        SizedBox(height: 12),
+
+        // ===== HEADER =====
+        Container(
+          height: 82,
+          padding: EdgeInsets.symmetric(horizontal: 18),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/vz223.png'),
+              fit: BoxFit.fill,
+            ),
+          ),
+        ),
+
+        SizedBox(height: 10),
+
+        // ===== NATIONAL ID CARD IMAGE =====
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 25),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: Image.asset(
+              "assets/023.png",
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+
+        SizedBox(height: 10),
+
+        // ===== INFO BOX =====
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8),
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+            decoration: BoxDecoration(
+              color: Color(0xFFF4F4F4),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: rightData.entries.map((e) {
+                      return Padding(
+                        padding: EdgeInsets.only(bottom: 0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(e.key, style: TextStyle(fontSize: 8)),
+                            SizedBox(height: 1),
+                            Text(e.value, style: TextStyle(fontSize: 9)),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+                SizedBox(width: 1),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: leftData.entries.map((e) {
+                      return Padding(
+                        padding: EdgeInsets.only(bottom: 0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(e.key, style: TextStyle(fontSize: 8)),
+                            SizedBox(height: 1),
+                            Text(e.value, style: TextStyle(fontSize: 9)),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+
+        SizedBox(height: 35),
+
+        // ===== FOOTER =====
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
+            children: [
+              Image.asset("assets/qr.png", width: 60, height: 60),
+              SizedBox(width: 15),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("تم مشاركة هذه الوثيقة من خلال توكلنا",
+                        style: TextStyle(fontSize: 11)),
+                    SizedBox(height: 4),
+                    Text("This document is shared through",
+                        style: TextStyle(fontSize: 10)),
+                    Text("Tawakkalna",
+                        style: TextStyle(fontSize: 10)),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        SizedBox(height: 50),
+      ],
+    );
+  }
   // هذا الويجت يبني "الورقة" بنفس شكل الصورة قدر الإمكان
   Widget _buildPaperView() {
     return Container(
