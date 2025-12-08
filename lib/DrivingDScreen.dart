@@ -45,8 +45,87 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
     //'نسخة/Copy': '5',
   };
 
+  
   // فتح الـ Bottom Sheet (قابلة للسحب) التي تعرض الورقة
   void _openShareSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return DraggableScrollableSheet(
+          initialChildSize: 0.78,
+          minChildSize: 0.5,
+          maxChildSize: 0.98,
+          expand: false,  // ⚠️ مهم جدًا حتى لا ينهار
+          builder: (context, scrollController) {
+            return Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+              ),
+              child: Column(
+                children: [
+                  const SizedBox(height: 8),
+
+                  // الشريط العلوي
+                  Container(
+                    width: 60,
+                    height: 6,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                  ),
+
+                  // زر المشاركة
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12.0,
+                      vertical: 6,
+                    ),
+                    child: Row(
+                      children: [
+                        const Expanded(child: SizedBox()),
+                        IconButton(
+                          tooltip: 'مشاركة كملف PDF',
+                          icon: const Icon(Icons.share_outlined, size: 28),
+                          onPressed: () async {
+                            await _captureAndSharePdf();
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // المحتوى — يجب أن يكون داخل Expanded + Scroll
+                  Expanded(
+                    child: SingleChildScrollView(
+                      controller: scrollController,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12.0,
+                          vertical: 8,
+                        ),
+                        child: Center(
+                          child: RepaintBoundary(
+                            key: _paperKey,
+                            child: _buildA4Paper(),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  /*void _openShareSheet() {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -136,7 +215,7 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
         );
       },
     );
-  }
+  }*/
 
   // التقاط الـ Widget كصورة، ثم إنشاء PDF ومشاركة الملف
   Future<void> _captureAndSharePdf() async {
