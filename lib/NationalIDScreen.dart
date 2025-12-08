@@ -530,13 +530,13 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const SizedBox(height: 12),
+          const SizedBox(height: 15),
 
           // =================== HEADER ===================
           Container(
             height: 82,
             //color: const Color(0xFF2B2B2B),
-            padding: const EdgeInsets.symmetric(horizontal: 18),
+            padding: const EdgeInsets.symmetric(horizontal: 14),
             decoration: BoxDecoration(
               // لو كنت تريد لون خلفية احتياطي يمكن وضعه هنا:
               //color: const Color(0xFF2B2B2B),
@@ -578,18 +578,22 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
           ),*/
           ),
 
-          const SizedBox(height: 10),
+          const SizedBox(height: 15),
 
           // =================== NATIONAL ID CARD IMAGE ===================
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16),
-              child: Image.asset("assets/022.png", fit: BoxFit.cover),
+              child: Image.asset(
+                "assets/022.png",
+                fit: BoxFit.fill,
+                height: 150,
+              ),
             ),
           ),
 
-          const SizedBox(height: 10),
+          const SizedBox(height: 15),
 
           // =================== INFO BOX ===================
           Padding(
