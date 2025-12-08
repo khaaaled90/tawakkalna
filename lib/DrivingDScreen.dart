@@ -502,7 +502,7 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
               child: Image.asset(
                 "assets/023.png",
                 fit: BoxFit.fill,
-                height: 150,
+                height: 200,
               ),
             ),
           ),

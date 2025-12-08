@@ -588,7 +588,7 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
               child: Image.asset(
                 "assets/022.png",
                 fit: BoxFit.fill,
-                height: 150,
+                height: 200,
               ),
             ),
           ),
