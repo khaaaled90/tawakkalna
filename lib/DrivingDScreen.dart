@@ -45,9 +45,8 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
     //'نسخة/Copy': '5',
   };
 
-  
   // فتح الـ Bottom Sheet (قابلة للسحب) التي تعرض الورقة
-  void _openShareSheet() {
+  /*void _openShareSheet() {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -123,9 +122,9 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
         );
       },
     );
-  }
+  }*/
 
-  /*void _openShareSheet() {
+  void _openShareSheet() {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -175,7 +174,8 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
                       ],
                     ),
                   ),
-                  Flexible(
+
+                  /*Flexible(
                     child: SingleChildScrollView(
                       controller: scrollController,
                       child: Padding(
@@ -188,9 +188,8 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
                         ),
                       ),
                     ),
-                  ),
-
-                  /*Expanded(
+                  ),*/
+                  Expanded(
                     child: SingleChildScrollView(
                       controller: scrollController,
                       child: Center(
@@ -201,13 +200,13 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
                           ),
                           child: RepaintBoundary(
                             key: _paperKey,
-                            child: _buildA4Paper(),
-                            //child: _buildPaperView(), // هذا هو التصميم المطابق
+                            //child: _buildA4Paper(),
+                            child: _buildPaperView(), // هذا هو التصميم المطابق
                           ),
                         ),
                       ),
                     ),
-                  ),*/
+                  ),
                 ],
               ),
             );
@@ -215,13 +214,14 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
         );
       },
     );
-  }*/
+  }
 
   // التقاط الـ Widget كصورة، ثم إنشاء PDF ومشاركة الملف
   Future<void> _captureAndSharePdf() async {
     try {
-      final boundary = _paperKey.currentContext?.findRenderObject()
-          as RenderRepaintBoundary?;
+      final boundary =
+          _paperKey.currentContext?.findRenderObject()
+              as RenderRepaintBoundary?;
 
       if (boundary == null) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -266,8 +266,8 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
                 alignment: pw.Alignment.center,
                 child: pw.Image(
                   pwImage,
-                  fit: pw.BoxFit.fill,     // ❗ لا قص ولا تمدد، ويحافظ على النسبة
-                  width: pageWidth,           // نجبر الصورة على أكبر مساحة ممكنة
+                  fit: pw.BoxFit.fill, // ❗ لا قص ولا تمدد، ويحافظ على النسبة
+                  width: pageWidth, // نجبر الصورة على أكبر مساحة ممكنة
                   height: pageHeight,
                   alignment: pw.Alignment.center,
                 ),
@@ -276,7 +276,6 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
           },
         ),
       );
-
 
       /*pdfDoc.addPage(
         pw.Page(
@@ -326,7 +325,8 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
       ).showSnackBar(SnackBar(content: Text('حدث خطأ أثناء المشاركة: $e')));
     }
   }
-  Widget _buildA4Paper() {
+
+  /*Widget _buildA4Paper() {
     const double ratio = 3.0; // دقة عالية للطباعة
 
     // أبعاد A4 بالنقاط × نسبة الجودة
@@ -344,8 +344,9 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
         ),
       ),
     );
-  }
-  Widget _buildPaperContent() {
+  }*/
+
+  /*Widget _buildPaperContent() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -370,10 +371,7 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
           padding: EdgeInsets.symmetric(horizontal: 25),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(16),
-            child: Image.asset(
-              "assets/023.png",
-              fit: BoxFit.cover,
-            ),
+            child: Image.asset("assets/023.png", fit: BoxFit.cover),
           ),
         ),
 
@@ -447,13 +445,16 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("تم مشاركة هذه الوثيقة من خلال توكلنا",
-                        style: TextStyle(fontSize: 11)),
+                    Text(
+                      "تم مشاركة هذه الوثيقة من خلال توكلنا",
+                      style: TextStyle(fontSize: 11),
+                    ),
                     SizedBox(height: 4),
-                    Text("This document is shared through",
-                        style: TextStyle(fontSize: 10)),
-                    Text("Tawakkalna",
-                        style: TextStyle(fontSize: 10)),
+                    Text(
+                      "This document is shared through",
+                      style: TextStyle(fontSize: 10),
+                    ),
+                    Text("Tawakkalna", style: TextStyle(fontSize: 10)),
                   ],
                 ),
               ),
@@ -464,7 +465,8 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
         SizedBox(height: 50),
       ],
     );
-  }
+  }*/
+
   // هذا الويجت يبني "الورقة" بنفس شكل الصورة قدر الإمكان
   Widget _buildPaperView() {
     return Container(
@@ -523,17 +525,25 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: rightData.entries.map((e) {
                         return Padding(
-                          padding: const EdgeInsets.only(bottom: 2),
+                          padding: const EdgeInsets.only(bottom: 4),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Text(e.key,
-                                  style: const TextStyle(
-                                      fontSize: 8, color: Colors.black)),
-                              const SizedBox(height: 2),
-                              Text(e.value,
-                                  style: const TextStyle(
-                                      fontSize: 9, color: Colors.black)),
+                              Text(
+                                e.key,
+                                style: const TextStyle(
+                                  fontSize: 8,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                e.value,
+                                style: const TextStyle(
+                                  fontSize: 9,
+                                  color: Colors.black,
+                                ),
+                              ),
                             ],
                           ),
                         );
@@ -548,17 +558,25 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: leftData.entries.map((e) {
                         return Padding(
-                          padding: const EdgeInsets.only(bottom: 2),
+                          padding: const EdgeInsets.only(bottom: 4),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Text(e.key,
-                                  style: const TextStyle(
-                                      fontSize: 8, color: Colors.black)),
-                              const SizedBox(height: 2),
-                              Text(e.value,
-                                  style: const TextStyle(
-                                      fontSize: 9, color: Colors.black)),
+                              Text(
+                                e.key,
+                                style: const TextStyle(
+                                  fontSize: 8,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                e.value,
+                                style: const TextStyle(
+                                  fontSize: 9,
+                                  color: Colors.black,
+                                ),
+                              ),
                             ],
                           ),
                         );
@@ -570,6 +588,7 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
               ),
             ),
           ),
+
           /*Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Container(
@@ -651,8 +670,7 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
               ),
             ),
           ),*/
-
-          const SizedBox(height: 35),
+          const SizedBox(height: 40),
 
           // =================== FOOTER ===================
           Padding(
@@ -698,8 +716,9 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12.0),
       child: Column(
-        crossAxisAlignment:
-            alignRight ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        crossAxisAlignment: alignRight
+            ? CrossAxisAlignment.end
+            : CrossAxisAlignment.start,
         children: [
           Text(title, style: TextStyle(color: Colors.black54, fontSize: 13)),
           const SizedBox(height: 6),
@@ -767,17 +786,20 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
                           return const SizedBox.shrink();
                         },
                         transitionBuilder: (_, anim, __, ___) {
-                          final scale =
-                              Tween<double>(begin: 0.3, end: 1.0).animate(
-                            CurvedAnimation(
-                                parent: anim, curve: Curves.easeOutBack),
-                          );
+                          final scale = Tween<double>(begin: 0.3, end: 1.0)
+                              .animate(
+                                CurvedAnimation(
+                                  parent: anim,
+                                  curve: Curves.easeOutBack,
+                                ),
+                              );
 
                           return Center(
                             child: Opacity(
                               opacity: anim.value,
                               child: Transform.scale(
-                                scale: scale.value *
+                                scale:
+                                    scale.value *
                                     1.35, // ← هذا ما يجعل الصورة ضخمة
                                 child: Transform.rotate(
                                   angle: 1.5708, // 90 درجة
@@ -838,18 +860,21 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
                         context: context,
                         barrierDismissible: true,
                         barrierLabel: '',
-                        barrierColor:
-                            Colors.black.withOpacity(0.85), // تغبيش الخلفية
+                        barrierColor: Colors.black.withOpacity(
+                          0.85,
+                        ), // تغبيش الخلفية
                         transitionDuration: const Duration(milliseconds: 300),
                         pageBuilder: (_, __, ___) {
                           return const SizedBox.shrink();
                         },
                         transitionBuilder: (_, anim, __, ___) {
-                          final scale =
-                              Tween<double>(begin: 0.4, end: 1.0).animate(
-                            CurvedAnimation(
-                                parent: anim, curve: Curves.easeOutBack),
-                          );
+                          final scale = Tween<double>(begin: 0.4, end: 1.0)
+                              .animate(
+                                CurvedAnimation(
+                                  parent: anim,
+                                  curve: Curves.easeOutBack,
+                                ),
+                              );
 
                           return Center(
                             child: Opacity(
@@ -868,8 +893,11 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Image.asset('assets/qr.png',
-                                          width: 220, height: 220),
+                                      Image.asset(
+                                        'assets/qr.png',
+                                        width: 220,
+                                        height: 220,
+                                      ),
                                       const SizedBox(height: 10),
                                       Text(
                                         dateNow,
@@ -933,8 +961,10 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
               const Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text('  الخدمات المرتبطة',
-                      style: TextStyle(color: Colors.white70, fontSize: 14)),
+                  Text(
+                    '  الخدمات المرتبطة',
+                    style: TextStyle(color: Colors.white70, fontSize: 14),
+                  ),
                 ],
               ),
               const SizedBox(height: 4),
@@ -1006,23 +1036,29 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
-              //crossAxisAlignment: CrossAxisAlignment.start,
-
-              child: // [
-                  //const Icon(Icons.copy, color: Colors.white70, size: 22),
-                  Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(title,
-                  style: const TextStyle(color: Colors.white70, fontSize: 14)),
-              const SizedBox(height: 4),
-              Text(value,
-                  style: const TextStyle(color: Colors.white, fontSize: 16)),
-              //const SizedBox(height: 8),
-            ],
-          )
-              //],
-              ),
+            //crossAxisAlignment: CrossAxisAlignment.start,
+            child: // [
+                //const Icon(Icons.copy, color: Colors.white70, size: 22),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 14,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      value,
+                      style: const TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                    //const SizedBox(height: 8),
+                  ],
+                ),
+            //],
+          ),
           SizedBox(width: 8),
           const Icon(Icons.copy, color: Colors.white70, size: 22),
           //const SizedBox(height: 4),
