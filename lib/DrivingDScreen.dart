@@ -23,21 +23,26 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
 
   // بيانات وهمية كما في الصورة — عدّلها إن أحببت
   final Map<String, String> leftData = {
-    'الرقم/IN Number': '2120808866',
-    'الاسم بالانجليزي/Name': 'FAISAL ABDULLAH ABDU QAYID',
-    'تاريخ الميلاد/Date Of Birth': '20/01/1995',
-    'تاريخ الاصدار/Date Issue': '14/07/2015',
-    //'تاريخ الانتهاء بالهجري/Expire Date in Hijri': '1450/09/18هـ',
+    'الرقم/IN Number': '1082319755',
+    'الاسم بالانجليزي/Name': 'IBRAHIM, RAED MUHAMMED I',
+    'النوع/Type': 'خاصة',
+    'تاريخ الميلاد/Date Of Birth': '17/04/1992',
+    'تاريخ الاصدار/Date Issue': '14/07/2017',
+    'تاريخ الانتهاء/Expire Date': '02/02/2029',
+    'فصيلة الدم/Blood type': '+O',
     '': '',
   };
 
   final Map<String, String> rightData = {
-    'الاسم/Name in Arsbic': 'فيصل عبدالله عبده قايد',
-    'مكان الميلاد/Place Of Pirrh': 'جده',
-    //'تاريخ الميلاد بالهجري/Date of': '1412/10/14هـ',
-    'رقم الهوية بالانجليزي/ID Number io': '2120808866',
-    'تاريخ الانتهاء/Expire Date': '06/06/2026',
-    'نسخة/Copy': '8',
+    'الاسم/Name in Arsbic': 'رائد بن محمد بن إبراهيم إبراهيم',
+    'الجنسية/Nationality': 'المملكة العربية السعودية',
+    'القيود/Restrictons': 'بدون قيود',
+    'تاريخ الميلاد بالهجري/Date of Brith hijre': '1412/10/14هـ',
+    'تاريخ الصدار بالهجري/Date of': 'published in hijre',
+    '1440/09/18هـ': '',
+    'تاريخ الانتهاء بالهجري/Expire Date in Hijri': 'Hijri',
+    '1450/09/18هـ': '',
+    //'نسخة/Copy': '5',
   };
 
   // فتح الـ Bottom Sheet (قابلة للسحب) التي تعرض الورقة
@@ -153,11 +158,28 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
       pdfDoc.addPage(
         pw.Page(
           pageFormat: PdfPageFormat.a4,
+          margin: pw.EdgeInsets.zero, // إلغاء الهوامش
           build: (ctx) {
-            return pw.Center(child: pw.Image(pwImage, fit: pw.BoxFit.contain));
+            return pw.Container(
+              width: double.infinity,
+              height: double.infinity,
+              child: pw.Image(
+                pwImage,
+                fit: pw.BoxFit.fill, // الصورة تملأ الصفحة بالكامل
+              ),
+            );
           },
         ),
       );
+
+      /*pdfDoc.addPage(
+        pw.Page(
+          pageFormat: PdfPageFormat.a4,
+          build: (ctx) {
+            return pw.Center(child: pw.Image(pwImage, fit: pw.BoxFit.cover));
+          },
+        ),
+      );*/
 
       // ⬇ حفظ ملف مؤقت
       final tempDir = await getTemporaryDirectory();
@@ -219,6 +241,72 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
 
           // =================== INFO BOX ===================
           Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 08),
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+              decoration: BoxDecoration(
+                color: const Color(0xFFF4F4F4),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // العمود العربي
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: rightData.entries.map((e) {
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 2),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(e.key,
+                                  style: const TextStyle(
+                                      fontSize: 8, color: Colors.black)),
+                              const SizedBox(height: 2),
+                              Text(e.value,
+                                  style: const TextStyle(
+                                      fontSize: 9, color: Colors.black)),
+                            ],
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                  // العمود الإنجليزي
+                  const SizedBox(width: 1),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: leftData.entries.map((e) {
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 2),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(e.key,
+                                  style: const TextStyle(
+                                      fontSize: 8, color: Colors.black)),
+                              const SizedBox(height: 2),
+                              Text(e.value,
+                                  style: const TextStyle(
+                                      fontSize: 9, color: Colors.black)),
+                            ],
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                  //const SizedBox(width: 10),
+                ],
+              ),
+            ),
+          ),
+          /*Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
@@ -298,7 +386,7 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
                 ],
               ),
             ),
-          ),
+          ),*/
 
           const SizedBox(height: 35),
 
@@ -409,7 +497,7 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
                         context: context,
                         barrierDismissible: true,
                         barrierLabel: '',
-                        barrierColor: Colors.black.withOpacity(0.60),
+                        barrierColor: Colors.black.withOpacity(0.85),
                         transitionDuration: const Duration(milliseconds: 350),
                         pageBuilder: (_, __, ___) {
                           return const SizedBox.shrink();
@@ -487,7 +575,7 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
                         barrierDismissible: true,
                         barrierLabel: '',
                         barrierColor:
-                            Colors.black.withOpacity(0.60), // تغبيش الخلفية
+                            Colors.black.withOpacity(0.85), // تغبيش الخلفية
                         transitionDuration: const Duration(milliseconds: 300),
                         pageBuilder: (_, __, ___) {
                           return const SizedBox.shrink();
@@ -587,38 +675,38 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
               ),
               const SizedBox(height: 4),
 
-              _item('الرقم', '2120808866'),
+              _item('الرقم', '1082319755'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              _item('الاسم', 'فيصل عبدالله عبده قايد'),
+              _item('الاسم', 'رائد بن محمد بن إبراهيم إبراهيم'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              _item('الاسم بالإنجليزي', 'FAISAL ABDULLAH ABDU QAYID'),
+              _item('الاسم بالإنجليزي', 'IBRAHIM, RAED MUHAMMED I'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              _item('الجنسية', 'اليمن'),
+              _item('الجنسية', 'المملكة العربية السعودية'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
               _item('القيود', 'بدون قيود'),
               Container(height: 1, color: Colors.white24),
-              _item('تاريخ الميلاد', '20/01/1995'),
+              _item('تاريخ الميلاد', '17/04/1992'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              /*_item('تاريخ الميلاد بالهجري', '1412/10/14هـ'),
+              _item('تاريخ الميلاد بالهجري', '1412/10/14هـ'),
               Container(height: 1, color: Colors.white24),
-              const SizedBox(height: 4),*/
+              const SizedBox(height: 4),
               _item('تاريخ الاصدار', '17/03/2015'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              /*_item('تاريخ الاصدار بالهجري', '1440/09/18هـ'),
-              Container(height: 1, color: Colors.white24),
-              const SizedBox(height: 4),*/
-              _item('تاريخ الانتهاء', '06/06/2026'),
+              _item('تاريخ الاصدار بالهجري', '1440/09/18هـ'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              /*_item('تاريخ الانتهاء بالهجري', '1450/09/18هـ'),
+              _item('تاريخ الانتهاء', '10/12/2028'),
               Container(height: 1, color: Colors.white24),
-              const SizedBox(height: 4),*/
+              const SizedBox(height: 4),
+              _item('تاريخ الانتهاء بالهجري', '1450/09/18هـ'),
+              Container(height: 1, color: Colors.white24),
+              const SizedBox(height: 4),
               _item('فصيلة الدم', 'O+'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),

@@ -165,7 +165,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Text(
-                                'فيصل قايد',
+                                'رائد إبراهيم',
                                 style: TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.w600),
                                 textAlign: TextAlign.right,
@@ -180,7 +180,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                             children: [
                               // رقم الهوية (يمين)
                               const Text(
-                                'رقم الهوية: 2120808866',
+                                'رقم الهوية: 1082319755',
                                 style: TextStyle(
                                     fontSize: 18, color: Colors.black87),
                               ),
@@ -199,27 +199,34 @@ class _ProfileScreenState extends State<ProfileScreen>
 
                           const SizedBox(height: 16),
 
-                          // العمر + الدولة
                           Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
+                            // العمر + الدولة
                             children: [
-                              _statBoxWithImage('المملكة العربية السعودية',
-                                  'assets/v333.png'),
-                              const SizedBox(width: 12),
-                              _statBoxWithImage('35', 'assets/v555.png'),
-                            ],
-                          ),
-
-                          const SizedBox(height: 10),
-
-                          // تاريخ الميلاد + فصيلة الدم
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              _statBoxWithImage(
-                                  '1992-04-17', 'assets/v222.png'),
-                              const SizedBox(width: 50),
-                              _statBoxWithImage('+A', 'assets/v444.png'),
+                              Column(
+                                //crossAxisAlignment: CrossAxisAlignment.start
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  _statBoxWithImage('المملكة العربية السعودية',
+                                      'assets/v333.png'),
+                                  const SizedBox(height: 10),
+                                  _statBoxWithImage(
+                                      '1992-04-17', 'assets/v222.png'),
+                                  //_statBoxWithImage('35', 'assets/v555.png'),
+                                ],
+                              ),
+                              const SizedBox(width: 20),
+                              // تاريخ الميلاد + فصيلة الدم
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  _statBoxWithImage('35', 'assets/v555.png'),
+                                  //_statBoxWithImage('1992-04-17', 'assets/v222.png'),
+                                  const SizedBox(height: 10),
+                                  _statBoxWithImage('+0', 'assets/v444.png'),
+                                ],
+                              ),
                             ],
                           ),
                         ],
@@ -630,7 +637,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                           ),
                           // مستنداتي
                           // ===================== تبويب مستنداتي =====================
-                          /*SingleChildScrollView(
+                          SingleChildScrollView(
                             child: Directionality(
                               textDirection: TextDirection.rtl,
                               child: Column(
@@ -709,11 +716,63 @@ class _ProfileScreenState extends State<ProfileScreen>
                                       ),
                                     ),
                                   ),
+
+                                  /*Container(
+                                    padding: EdgeInsets.all(18),
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 16),
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey.shade100,
+                                      borderRadius: BorderRadius.circular(22),
+                                    ),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        RotatedBox(
+                                          quarterTurns: 3,
+                                          child: Text(
+                                            "V872997",
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              color: Colors.black87,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(width: 20),
+                                        RotatedBox(
+                                          quarterTurns:
+                                              3, // لجعل النص عمودي كما بالصورة
+                                          child: Text(
+                                            "رائد بن محمد بن ابراهيم ابراهيم",
+                                            style: TextStyle(
+                                                fontSize: 18, height: 1.3),
+                                          ),
+                                        ),
+                                        // --- صورة الجواز (يسار) ---
+                                        SizedBox(width: 70),
+                                        Container(
+                                          width: 150,
+                                          height: 180,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(16),
+                                            color: Colors.white,
+                                          ),
+                                          child: Image.asset(
+                                            "assets/passport_sample.png",
+                                            fit: BoxFit.fill,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),*/
+
                                   SizedBox(height: 10),
                                 ],
                               ),
                             ),
-                          ),*/
+                          ),
 
                           // سيرتي
                           // ===================== تبويب سيرتي =====================
@@ -950,10 +1009,10 @@ void _showMoreSheet(BuildContext context) {
                         const SizedBox(height: 6),
                         _sheetRow(
                             label: 'رقم الهوية',
-                            value: '2120808866',
+                            value: '1082319755',
                             onCopy: () {
                               Clipboard.setData(
-                                  const ClipboardData(text: '2120808866'));
+                                  const ClipboardData(text: '1082319755'));
                               Navigator.of(context).pop();
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
@@ -962,20 +1021,20 @@ void _showMoreSheet(BuildContext context) {
                             }),
                         _sheetRow(
                             label: 'الاسم',
-                            value: 'فيصل عبدالله عبده قايد',
+                            value: 'رائد بن محمد بن ابراهيم ابراهيم',
                             onCopy: () {
                               Clipboard.setData(const ClipboardData(
-                                  text: 'فيصل عبدالله عبده قايد'));
+                                  text: 'رائد بن محمد بن ابراهيم ابراهيم'));
                               ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
                                       content: Text('تم نسخ الاسم')));
                             }),
                         _sheetRow(
                             label: 'الجنسية',
-                            value: 'اليمن',
+                            value: 'المملكة العربية السعودية',
                             onCopy: () {
                               Clipboard.setData(const ClipboardData(
-                                  text: 'اليمن'));
+                                  text: 'المملكة العربية السعودية'));
                               ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(content: Text('تم النسخ')));
                             }),
@@ -990,10 +1049,10 @@ void _showMoreSheet(BuildContext context) {
                             }),
                         _sheetRow(
                             label: 'الحالة الاجتماعية',
-                            value: 'اعزب',
+                            value: 'متزوج',
                             onCopy: () {
                               Clipboard.setData(
-                                  const ClipboardData(text: 'اعزب'));
+                                  const ClipboardData(text: 'متزوج'));
                               ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(content: Text('تم النسخ')));
                             }),
@@ -1008,7 +1067,7 @@ void _showMoreSheet(BuildContext context) {
                             }),
                         _sheetRow(
                             label: 'المهنة',
-                            value: 'مندوب مبيعات',
+                            value: '-',
                             onCopy: () {
                               Clipboard.setData(const ClipboardData(text: '-'));
                               ScaffoldMessenger.of(context).showSnackBar(

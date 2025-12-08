@@ -122,7 +122,7 @@ class PassportDetails extends StatelessWidget {
   Widget _circleButton(BuildContext context, String imagePath) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.85,
-      height: MediaQuery.of(context).size.height * 0.16,
+      height: MediaQuery.of(context).size.height * 0.14,
       child: Padding(
         padding: const EdgeInsets.all(1.0),
         child: Image.asset(imagePath, fit: BoxFit.fill),

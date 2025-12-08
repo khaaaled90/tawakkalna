@@ -1,6 +1,7 @@
 import 'dart:io';
 //import 'dart:typed_data';
 import 'dart:ui' as ui;
+import 'dart:ui';
 import 'package:pdf/pdf.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/foundation.dart';
@@ -23,21 +24,22 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
 
   // بيانات وهمية كما في الصورة — عدّلها إن أحببت
   final Map<String, String> leftData = {
-    'الرقم/IN Number': '2120808866',
-    'الاسم بالانجليزي/Name': 'FAISAL ABDULLAH ABDU QAYID',
-    'تاريخ الميلاد/Date Of Birth': '20/01/1995',
-    'تاريخ الاصدار/Date Issue': '14/07/2015',
-    //'تاريخ الانتهاء بالهجري/Expire Date in Hijri': '1450/09/18هـ',
+    'الرقم/IN Number': '1082319755',
+    'الاسم بالانجليزي/Name': 'IBRAHIM, RAED MUHAMMED I',
+    'تاريخ الميلاد/Date Of Birth': '17/04/1992',
+    'تاريخ الاصدار/Date Issue': '14/07/2017',
+    'تاريخ الانتهاء بالهجري/Expire Date in Hijri': '1450/09/18هـ',
     '': '',
   };
 
   final Map<String, String> rightData = {
-    'الاسم/Name in Arsbic': 'فيصل عبدالله عبده قايد',
+    'الاسم/Name in Arsbic': 'رائد بن محمد بن إبراهيم إبراهيم',
     'مكان الميلاد/Place Of Pirrh': 'جده',
-    //'تاريخ الميلاد بالهجري/Date of': '1412/10/14هـ',
-    'رقم الهوية بالانجليزي/ID Number io': '2120808866',
-    'تاريخ الانتهاء/Expire Date': '06/06/2026',
-    'نسخة/Copy': '8',
+    'تاريخ الميلاد بالهجري/Date of': '1412/10/14هـ',
+    'رقم الهوية بالانجليزي/ID Number io': '1082319755',
+    'تاريخ الانتهاء/Expire Date': '02/02/2029',
+    'نسخة/Copy': '5',
+    //'': '',
   };
 
   // فتح الـ Bottom Sheet (قابلة للسحب) التي تعرض الورقة
@@ -149,16 +151,32 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
       pdfDoc.addPage(
         pw.Page(
           pageFormat: PdfPageFormat.a4,
+          margin: pw.EdgeInsets.zero, // إلغاء الهوامش
           build: (ctx) {
-            return pw.Center(
+            return pw.Container(
+              width: double.infinity,
+              height: double.infinity,
               child: pw.Image(
                 pwImage,
-                fit: pw.BoxFit.contain,
+                fit: pw.BoxFit.fill, // الصورة تملأ الصفحة بالكامل
               ),
             );
           },
         ),
       );
+      /*pdfDoc.addPage(
+        pw.Page(
+          pageFormat: PdfPageFormat.a4,
+          build: (ctx) {
+            return pw.Center(
+              child: pw.Image(
+                pwImage,
+                fit: pw.BoxFit.cover,
+              ),
+            );
+          },
+        ),
+      );*/
 
       // ⬇ حفظ ملف مؤقت
       final tempDir = await getTemporaryDirectory();
@@ -308,9 +326,9 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
 
           // =================== INFO BOX ===================
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 08),
             child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
               decoration: BoxDecoration(
                 color: const Color(0xFFF4F4F4),
                 borderRadius: BorderRadius.circular(12),
@@ -326,17 +344,17 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: rightData.entries.map((e) {
                         return Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
+                          padding: const EdgeInsets.only(bottom: 0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Text(e.key,
                                   style: const TextStyle(
-                                      fontSize: 9, color: Colors.black54)),
-                              const SizedBox(height: 3),
+                                      fontSize: 8, color: Colors.black)),
+                              const SizedBox(height: 1),
                               Text(e.value,
                                   style: const TextStyle(
-                                      fontSize: 9, color: Colors.black54)),
+                                      fontSize: 9, color: Colors.black)),
                             ],
                           ),
                         );
@@ -344,23 +362,24 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
                     ),
                   ),
                   // العمود الإنجليزي
+                  const SizedBox(width: 1),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: leftData.entries.map((e) {
                         return Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
+                          padding: const EdgeInsets.only(bottom: 0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Text(e.key,
                                   style: const TextStyle(
-                                      fontSize: 9, color: Colors.black54)),
-                              const SizedBox(height: 3),
+                                      fontSize: 8, color: Colors.black)),
+                              const SizedBox(height: 1),
                               Text(e.value,
                                   style: const TextStyle(
-                                      fontSize: 9, color: Colors.black54)),
+                                      fontSize: 9, color: Colors.black)),
                             ],
                           ),
                         );
@@ -469,7 +488,56 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
                   //child: Image.asset('assets/022.png', fit: BoxFit.cover),
+                  //import 'dart:ui';
+
                   child: GestureDetector(
+                    onTap: () {
+                      showGeneralDialog(
+                        context: context,
+                        barrierDismissible: true,
+                        barrierLabel: '',
+                        // ⇦ زِد هنا قيمة التعتيــم للخلفية فقط
+                        barrierColor: Colors.black.withOpacity(0.85),
+                        transitionDuration: const Duration(milliseconds: 350),
+                        pageBuilder: (_, __, ___) => const SizedBox.shrink(),
+                        transitionBuilder: (_, anim, __, ___) {
+                          final scale =
+                              Tween<double>(begin: 0.3, end: 1.0).animate(
+                            CurvedAnimation(
+                                parent: anim, curve: Curves.easeOutBack),
+                          );
+
+                          return Center(
+                            child: Opacity(
+                              opacity: anim.value,
+                              child: Transform.scale(
+                                scale: scale.value * 1.35,
+                                child: Transform.rotate(
+                                  angle: 1.5708,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(12),
+                                    // هنا الصورة دون أي غطاء أو تعتيم إضافي
+                                    child: Image.asset(
+                                      'assets/022.png',
+                                      fit: BoxFit.contain,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.95,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Image.asset('assets/022.png', fit: BoxFit.cover),
+                    ),
+                  ),
+
+                  /*child: GestureDetector(
                     onTap: () {
                       showGeneralDialog(
                         context: context,
@@ -510,7 +578,7 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
                       borderRadius: BorderRadius.circular(12),
                       child: Image.asset('assets/022.png', fit: BoxFit.cover),
                     ),
-                  ),
+                  ),*/
                 ),
               ),
 
@@ -552,7 +620,8 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
                         barrierDismissible: true,
                         barrierLabel: '',
                         barrierColor:
-                            Colors.black.withOpacity(0.60), // تغبيش الخلفية
+                            Colors.black.withOpacity(0.85), // تغبيش الخلفية
+
                         transitionDuration: const Duration(milliseconds: 300),
                         pageBuilder: (_, __, ___) {
                           return const SizedBox.shrink();
@@ -642,34 +711,34 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
               const SizedBox(height: 20),
 
               // عناصر المعلومات (عرض سريع بدون التكرار الكامل لأن الورقة الكاملة داخل الـ sheet)
-              _item('نسخة', '8'),
+              _item('نسخة', '5'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              _item('الاسم', 'فيصل عبدالله عبده قايد'),
+              _item('الاسم', 'رائد بن محمد بن إبراهيم إبراهيم'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              _item('رقم البطاقة', '2120808866'),
+              _item('رقم البطاقة', '1082319755'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              /*_item('تاريخ الميلاد بالهجري', '1412/10/14هـ'),
+              _item('تاريخ الميلاد بالهجري', '1412/10/14هـ'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
               _item('تاريخ الانتهاء بالهجري', '1450/09/18هـ'),
               Container(height: 1, color: Colors.white24),
-              const SizedBox(height: 4),*/
+              const SizedBox(height: 4),
               _item('مكان الميلاد', 'جده'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              _item('الاسم بالإنجليزي', 'FAISAL ABDULLAH ABDU QAYID'),
+              _item('الاسم بالإنجليزي', 'IBRAHIM, RAED MUHAMMED I'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              _item('رقم الهوية بالإنجليزي', '2120808866'),
+              _item('رقم الهوية بالإنجليزي', '1082319755'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              _item('تاريخ الميلاد بالميلادي', '20/01/1995'),
+              _item('تاريخ الميلاد بالميلادي', '17/04/1992'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              _item('تاريخ الانتهاء بالميلادي', '06/06/2026'),
+              _item('تاريخ الانتهاء بالميلادي', '02/02/2029'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
 
