@@ -91,7 +91,22 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
                       ],
                     ),
                   ),
-                  Expanded(
+                  Flexible(
+                    child: SingleChildScrollView(
+                      controller: scrollController,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
+                        child: Center(
+                          child: RepaintBoundary(
+                            key: _paperKey,
+                            child: _buildA4Paper(),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  /*Expanded(
                     child: SingleChildScrollView(
                       controller: scrollController,
                       child: Center(
@@ -106,7 +121,7 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
                         ),
                       ),
                     ),
-                  ),
+                  ),*/
                 ],
               ),
             );
