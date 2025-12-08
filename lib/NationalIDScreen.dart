@@ -148,18 +148,33 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
       final pdfDoc = pw.Document();
       final pwImage = pw.MemoryImage(pngBytes);
 
-            pdfDoc.addPage(
+      pdfDoc.addPage(
         pw.Page(
           pageFormat: PdfPageFormat.a4,
-          margin: pw.EdgeInsets.zero,
+          margin: pw.EdgeInsets.zero, // لا هوامش
           build: (ctx) {
-            return pw.Image(
-              pwImage,
-              fit: pw.BoxFit.cover,
+            // استخدم عرض/ارتفاع الصفحة كحد أقصى للصورة
+            final pageWidth = PdfPageFormat.a4.width;
+            final pageHeight = PdfPageFormat.a4.height;
+
+            return pw.Center(
+              child: pw.Container(
+                width: pageWidth,
+                height: pageHeight,
+                alignment: pw.Alignment.center,
+                child: pw.Image(
+                  pwImage,
+                  fit: pw.BoxFit.contain,     // ❗ لا قص ولا تمدد، ويحافظ على النسبة
+                  width: pageWidth,           // نجبر الصورة على أكبر مساحة ممكنة
+                  height: pageHeight,
+                  alignment: pw.Alignment.center,
+                ),
+              ),
             );
           },
         ),
       );
+
 
       /*pdfDoc.addPage(
         pw.Page(
@@ -171,7 +186,10 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
               height: double.infinity,
               child: pw.Image(
                 pwImage,
-                fit: pw.BoxFit.cover, // الصورة تملأ الصفحة بالكامل
+                fit: pw.BoxFit.contain, // الصورة تملأ الصفحة بالكامل
+                width: pageWidth,           // نجبر الصورة على أكبر مساحة ممكنة
+                height: pageHeight,
+                alignment: pw.Alignment.center,
               ),
             );
           },
