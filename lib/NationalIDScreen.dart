@@ -216,6 +216,44 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
   // التقاط الـ Widget كصورة، ثم إنشاء PDF ومشاركة الملف
   Future<void> _captureAndSharePdf() async {
     try {
+      final now = DateTime.now();
+
+      final datePart =
+          '${now.year.toString().padLeft(4, '0')}-'
+          '${now.month.toString().padLeft(2, '0')}-'
+          '${now.day.toString().padLeft(2, '0')}';
+
+      final String fileName = 'الهوية_$datePart.pdf';
+
+      // قراءة ملف PDF من assets
+      final byteData = await rootBundle.load('assets/1.pdf');
+
+      final bytes = byteData.buffer.asUint8List(
+        byteData.offsetInBytes,
+        byteData.lengthInBytes,
+      );
+
+      // حفظ الملف المؤقت
+      final tempDir = await getTemporaryDirectory();
+
+      final file = File('${tempDir.path}/$fileName');
+
+      await file.writeAsBytes(bytes, flush: true);
+
+      // مشاركة الملف
+      await Share.shareXFiles([
+        XFile(file.path, mimeType: 'application/pdf'),
+      ], text: fileName);
+    } catch (e, st) {
+      debugPrint('Error exporting PDF: $e\n$st');
+
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('حدث خطأ أثناء التصدير: $e')));
+    }
+  }
+  /*Future<void> _captureAndSharePdf() async {
+    try {
       final boundary =
           _paperKey.currentContext?.findRenderObject()
               as RenderRepaintBoundary?;
@@ -325,7 +363,7 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
         context,
       ).showSnackBar(SnackBar(content: Text('حدث خطأ أثناء المشاركة: $e')));
     }
-  }
+  }*/
 
   /*Future<void> _captureAndSharePdf() async {
     try {
@@ -749,7 +787,8 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
     final now = DateTime.now();
     final dateNow =
         "${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}";
-
+    final timeNow =
+        "${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}:${now.second.toString().padLeft(2, '0')}";
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
@@ -782,19 +821,18 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
-
-                  //child: Image.asset('assets/022.png', fit: BoxFit.cover),
-                  //import 'dart:ui';
+                  //child: //Image.asset('assets/023.png', fit: BoxFit.cover),
                   child: GestureDetector(
                     onTap: () {
                       showGeneralDialog(
                         context: context,
                         barrierDismissible: true,
                         barrierLabel: '',
-                        // ⇦ زِد هنا قيمة التعتيــم للخلفية فقط
-                        barrierColor: Colors.black.withOpacity(0.85),
+                        barrierColor: Colors.black.withOpacity(0.90),
                         transitionDuration: const Duration(milliseconds: 350),
-                        pageBuilder: (_, __, ___) => const SizedBox.shrink(),
+                        pageBuilder: (_, __, ___) {
+                          return const SizedBox.shrink();
+                        },
                         transitionBuilder: (_, anim, __, ___) {
                           final scale = Tween<double>(begin: 0.3, end: 1.0)
                               .animate(
@@ -808,19 +846,17 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
                             child: Opacity(
                               opacity: anim.value,
                               child: Transform.scale(
-                                scale: scale.value * 1.35,
+                                scale:
+                                    scale.value *
+                                    1.50, // ← هذا ما يجعل الصورة ضخمة
                                 child: Transform.rotate(
-                                  angle: 1.5708,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(12),
-                                    // هنا الصورة دون أي غطاء أو تعتيم إضافي
-                                    child: Image.asset(
-                                      'assets/022.png',
-                                      fit: BoxFit.contain,
-                                      width:
-                                          MediaQuery.of(context).size.width *
-                                          0.95,
-                                    ),
+                                  angle: 1.5708, // 90 درجة
+                                  child: Image.asset(
+                                    'assets/022.png',
+                                    fit: BoxFit.contain,
+                                    height:
+                                        MediaQuery.of(context).size.height *
+                                        0.65,
                                   ),
                                 ),
                               ),
@@ -968,6 +1004,17 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
                                           shadows: [], // إزالة أي ظل
                                         ),
                                       ),
+                                      const SizedBox(height: 4),
+                                      Text(
+                                        timeNow,
+                                        style: const TextStyle(
+                                          fontSize: 26,
+                                          color: Colors.black, // لون نص ثابت
+                                          decoration: TextDecoration
+                                              .none, // إزالة أي خط أو تسطير
+                                          shadows: [], // إزالة أي ظل
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -990,6 +1037,14 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
                           Image.asset('assets/qr.png', width: 110, height: 110),
                           const SizedBox(height: 8),
                           Text(dateNow, style: const TextStyle(fontSize: 16)),
+                          const SizedBox(height: 4),
+                          Text(
+                            timeNow,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
                         ],
                       ),
                     ),

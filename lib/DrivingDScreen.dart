@@ -216,8 +216,47 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
     );
   }
 
-  // التقاط الـ Widget كصورة، ثم إنشاء PDF ومشاركة الملف
   Future<void> _captureAndSharePdf() async {
+    try {
+      final now = DateTime.now();
+
+      final datePart =
+          '${now.year.toString().padLeft(4, '0')}-'
+          '${now.month.toString().padLeft(2, '0')}-'
+          '${now.day.toString().padLeft(2, '0')}';
+
+      final String fileName = 'رخصة قيادة_$datePart.pdf';
+
+      // قراءة ملف PDF من assets
+      final byteData = await rootBundle.load('assets/2.pdf');
+
+      final bytes = byteData.buffer.asUint8List(
+        byteData.offsetInBytes,
+        byteData.lengthInBytes,
+      );
+
+      // حفظ الملف المؤقت
+      final tempDir = await getTemporaryDirectory();
+
+      final file = File('${tempDir.path}/$fileName');
+
+      await file.writeAsBytes(bytes, flush: true);
+
+      // مشاركة الملف
+      await Share.shareXFiles(
+        [XFile(file.path, mimeType: 'application/pdf')],
+        text: fileName,
+      );
+    } catch (e, st) {
+      debugPrint('Error exporting PDF: $e\n$st');
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('حدث خطأ أثناء التصدير: $e')),
+      );
+    }
+  }
+  // التقاط الـ Widget كصورة، ثم إنشاء PDF ومشاركة الملف
+  /*Future<void> _captureAndSharePdf() async {
     try {
       final boundary =
           _paperKey.currentContext?.findRenderObject()
@@ -324,7 +363,7 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
         context,
       ).showSnackBar(SnackBar(content: Text('حدث خطأ أثناء المشاركة: $e')));
     }
-  }
+  }*/
 
   /*Widget _buildA4Paper() {
     const double ratio = 3.0; // دقة عالية للطباعة
@@ -744,6 +783,8 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
     final now = DateTime.now();
     final dateNow =
         "${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}";
+    final timeNow =
+        "${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}:${now.second.toString().padLeft(2, '0')}";
 
     return Directionality(
       textDirection: TextDirection.rtl,
@@ -784,7 +825,7 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
                         context: context,
                         barrierDismissible: true,
                         barrierLabel: '',
-                        barrierColor: Colors.black.withOpacity(0.85),
+                        barrierColor: Colors.black.withOpacity(0.92),
                         transitionDuration: const Duration(milliseconds: 350),
                         pageBuilder: (_, __, ___) {
                           return const SizedBox.shrink();
@@ -913,6 +954,17 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
                                           shadows: [], // إزالة أي ظل
                                         ),
                                       ),
+                                      const SizedBox(height: 4),
+                                      Text(
+                                        timeNow,
+                                        style: const TextStyle(
+                                          fontSize: 26,
+                                          color: Colors.black, // لون نص ثابت
+                                          decoration: TextDecoration
+                                              .none, // إزالة أي خط أو تسطير
+                                          shadows: [], // إزالة أي ظل
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -935,6 +987,14 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
                           Image.asset('assets/qr.png', width: 110, height: 110),
                           const SizedBox(height: 8),
                           Text(dateNow, style: const TextStyle(fontSize: 16)),
+                          const SizedBox(height: 4),
+                          Text(
+                            timeNow,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
                         ],
                       ),
                     ),

@@ -91,9 +91,10 @@ class TawakkalnaScreen extends StatelessWidget {
                   const SizedBox(height: 25),
 
                   // ------------------ Quick Access -------------------
-                  const Text("الوصول السريع",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const Text(
+                    "الوصول السريع",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
                   const SizedBox(height: 10),
 
                   /*Row(
@@ -155,7 +156,6 @@ class TawakkalnaScreen extends StatelessWidget {
                       ],
                     ),
                   ),*/
-
                   const SizedBox(height: 25),
 
                   // ------------------ Favorite Cards -------------------
@@ -172,7 +172,9 @@ class TawakkalnaScreen extends StatelessWidget {
                       const Text(
                         "البطاقات المفضلة",
                         style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       GestureDetector(
                         onTap: () {
@@ -213,7 +215,8 @@ class TawakkalnaScreen extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (_) => const NationalIDScreen()),
+                                builder: (_) => const NationalIDScreen(),
+                              ),
                             );
                           },
                         ),
@@ -224,7 +227,20 @@ class TawakkalnaScreen extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (_) => const DrivingDScreen()),
+                                builder: (_) => const DrivingDScreen(),
+                              ),
+                            );
+                          },
+                        ),
+                        const SizedBox(width: 10),
+                        ToggleBlurCard(
+                          imagePath: "assets/023.png",
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const DrivingDScreen(),
+                              ),
                             );
                           },
                         ),
@@ -272,16 +288,19 @@ class TawakkalnaScreen extends StatelessWidget {
                         Expanded(child: _cardImage("assets/022.png")),
                       ],
                   ),*/
-
                   const SizedBox(height: 30),
 
                   // ------------------ Explore Categories -------------------
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
-                      Text("استكشف التصنيفات",
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold)),
+                      Text(
+                        "استكشف التصنيفات",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       Text("عرض الكل", style: TextStyle(color: Colors.green)),
                     ],
                   ),
@@ -292,9 +311,10 @@ class TawakkalnaScreen extends StatelessWidget {
                   const SizedBox(height: 30),
 
                   // ------------------ Preferred Center -------------------
-                  const Text("مركز المفضلة",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const Text(
+                    "مركز المفضلة",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
                   const SizedBox(height: 15),
 
                   Container(
@@ -321,7 +341,7 @@ class TawakkalnaScreen extends StatelessWidget {
 
                   const SizedBox(height: 30),
 
-/*
+                  /*
                   // ------------------ National Address -------------------
                   const Text("العنوان الوطني", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 15),
@@ -368,9 +388,10 @@ class TawakkalnaScreen extends StatelessWidget {
                   const SizedBox(height: 30),
 
                   // ------------------ Help -------------------
-                  const Text("هل تحتاج مساعدة؟",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const Text(
+                    "هل تحتاج مساعدة؟",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
                   const SizedBox(height: 10),
 
                   Container(
@@ -420,7 +441,7 @@ class TawakkalnaScreen extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
         boxShadow: const [
-          BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(0, 2))
+          BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(0, 2)),
         ],
       ),
       child: Row(
@@ -428,8 +449,10 @@ class TawakkalnaScreen extends StatelessWidget {
         children: [
           Icon(icon, color: Colors.green, size: 30), // تغيير حجم الأيقونة
           const SizedBox(width: 20),
-          Text(title,
-              style: const TextStyle(fontSize: 14)), // التحكم في حجم النص
+          Text(
+            title,
+            style: const TextStyle(fontSize: 14),
+          ), // التحكم في حجم النص
         ],
       ),
     );
@@ -470,7 +493,7 @@ class TawakkalnaScreen extends StatelessWidget {
     );
   }*/
 
-/*  Widget _cardImage(String path) {
+  /*  Widget _cardImage(String path) {
     return Container(
       height: 140,
       decoration: BoxDecoration(
@@ -494,7 +517,7 @@ class TawakkalnaScreen extends StatelessWidget {
     ];*/
 
   Widget _gridCategories() {
-// مسارات الصور لكل عنصر
+    // مسارات الصور لكل عنصر
     final imagePaths = [
       "assets/fs0010.png", // الدينية
       "assets/fs0011.png", // الشخصية والأسرة
@@ -519,10 +542,7 @@ class TawakkalnaScreen extends StatelessWidget {
               margin: const EdgeInsets.all(6),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
-                child: Image.asset(
-                  path,
-                  fit: BoxFit.contain,
-                ),
+                child: Image.asset(path, fit: BoxFit.contain),
               ),
             ),
           )
@@ -551,9 +571,9 @@ class TawakkalnaScreen extends StatelessWidget {
     );
   }*/
 
-//  import 'dart:ui';
-//
-//
+  //  import 'dart:ui';
+  //
+  //
   Widget _cardButton(String image, VoidCallback onTap) {
     return StatefulBuilder(
       builder: (context, setState) {
@@ -571,12 +591,7 @@ class TawakkalnaScreen extends StatelessWidget {
             child: Stack(
               children: [
                 // الصورة
-                Image.asset(
-                  image,
-                  width: 150,
-                  height: 100,
-                  fit: BoxFit.cover,
-                ),
+                Image.asset(image, width: 150, height: 100, fit: BoxFit.cover),
 
                 // الضبابية
                 if (isBlurred)
@@ -587,8 +602,9 @@ class TawakkalnaScreen extends StatelessWidget {
                       child: Container(
                         width: 150,
                         height: 100,
-                        color:
-                            Colors.black.withOpacity(0.15), // تعتيم بسيط + Blur
+                        color: Colors.black.withOpacity(
+                          0.15,
+                        ), // تعتيم بسيط + Blur
                       ),
                     ),
                   ),
@@ -626,8 +642,11 @@ class TawakkalnaScreen extends StatelessWidget {
           child: Icon(icon, color: Colors.green, size: 30),
         ),
         const SizedBox(height: 4),
-        Text(text,
-            textAlign: TextAlign.center, style: const TextStyle(fontSize: 13)),
+        Text(
+          text,
+          textAlign: TextAlign.center,
+          style: const TextStyle(fontSize: 13),
+        ),
       ],
     );
   }
@@ -646,8 +665,9 @@ class TawakkalnaScreen extends StatelessWidget {
           expand: false,
           builder: (context, scrollController) {
             return ClipRRect(
-              borderRadius:
-                  const BorderRadius.vertical(top: Radius.circular(20)),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(20),
+              ),
               child: Container(
                 color: Colors.white,
                 child: Column(
@@ -672,7 +692,9 @@ class TawakkalnaScreen extends StatelessWidget {
                             scrollController, // مهم لربط التمرير بالـ DraggableScrollableSheet
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 2),
+                            horizontal: 15,
+                            vertical: 2,
+                          ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
@@ -684,8 +706,9 @@ class TawakkalnaScreen extends StatelessWidget {
                                   child: Text(
                                     "العنوان الأول",
                                     style: TextStyle(
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.bold),
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -693,8 +716,9 @@ class TawakkalnaScreen extends StatelessWidget {
                               // شعار وصورة كبيرة
                               Center(
                                 child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 1),
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 1,
+                                  ),
                                   child: Image.asset(
                                     "assets/address_log.png", // ضع الشعار في assets
                                     width: 450,
@@ -707,50 +731,72 @@ class TawakkalnaScreen extends StatelessWidget {
                               const SizedBox(height: 4),
 
                               // مثال على صفوف البيانات مع أيقونة نسخ
-                              _infoRow(context,
-                                  title: "العنوان المختصر", value: "NAF2471"),
+                              _infoRow(
+                                context,
+                                title: "العنوان المختصر",
+                                value: "NAF2471",
+                              ),
                               _divider(),
-                              _infoRow(context,
-                                  title: "رقم المبنى", value: "2471"),
+                              _infoRow(
+                                context,
+                                title: "رقم المبنى",
+                                value: "2471",
+                              ),
                               _divider(),
                               _infoRow(context, title: "الحي", value: "النسيم"),
                               _divider(),
-                              _infoRow(context,
-                                  title: "الرمز الاضافي", value: "4397"),
+                              _infoRow(
+                                context,
+                                title: "الرمز الاضافي",
+                                value: "4397",
+                              ),
                               _divider(),
-                              _infoRow(context,
-                                  title: "الرمز البريدي", value: "22343"),
+                              _infoRow(
+                                context,
+                                title: "الرمز البريدي",
+                                value: "22343",
+                              ),
                               _divider(),
-                              _infoRow(context,
-                                  title: "الشارع", value: "الثقة"),
+                              _infoRow(
+                                context,
+                                title: "الشارع",
+                                value: "الثقة",
+                              ),
                               _divider(),
                               _infoRow(context, title: "المدينة", value: "جدة"),
                               const SizedBox(height: 8),
 
                               // زر المشاركة الكبير
                               Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 12),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 12,
+                                ),
                                 child: ElevatedButton.icon(
                                   onPressed: () {
                                     // هنا يمكن فتح دالة المشاركة (share) أو نسخ رابط
                                     // مثال بسيط: نسخ "NAF2471" إلى الحافظة
                                     Clipboard.setData(
-                                        const ClipboardData(text: "NAF2471"));
+                                      const ClipboardData(text: "NAF2471"),
+                                    );
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
-                                          content: Text("تم نسخ العنوان")),
+                                        content: Text("تم نسخ العنوان"),
+                                      ),
                                     );
                                   },
-                                  icon: const Icon(Icons.share,
-                                      color: Colors.white),
+                                  icon: const Icon(
+                                    Icons.share,
+                                    color: Colors.white,
+                                  ),
                                   label: const Padding(
                                     padding: EdgeInsets.symmetric(vertical: 14),
-                                    child: Text("مشاركة عنوانك",
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color: Colors.white,
-                                        )),
+                                    child: Text(
+                                      "مشاركة عنوانك",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.white,
+                                      ),
+                                    ),
                                   ),
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.black,
@@ -777,14 +823,18 @@ class TawakkalnaScreen extends StatelessWidget {
     );
   }
 
-  Widget _infoRow(BuildContext context,
-      {required String title, required String value}) {
+  Widget _infoRow(
+    BuildContext context, {
+    required String title,
+    required String value,
+  }) {
     return InkWell(
       onTap: () {
         // نسخ القيمة عند النقر على الصف بالكامل (اختياري)
         Clipboard.setData(ClipboardData(text: value));
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text("تم نسخ القيمة")));
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text("تم نسخ القيمة")));
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8),
@@ -797,12 +847,18 @@ class TawakkalnaScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title,
-                      style: const TextStyle(fontSize: 14, color: Colors.grey)),
+                  Text(
+                    title,
+                    style: const TextStyle(fontSize: 14, color: Colors.grey),
+                  ),
                   const SizedBox(height: 3),
-                  Text(value,
-                      style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold)),
+                  Text(
+                    value,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -810,8 +866,9 @@ class TawakkalnaScreen extends StatelessWidget {
             IconButton(
               onPressed: () {
                 Clipboard.setData(ClipboardData(text: value));
-                ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("تم نسخ القيمة")));
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(const SnackBar(content: Text("تم نسخ القيمة")));
               },
               icon: const Icon(Icons.copy_outlined, size: 26),
               color: Colors.grey[700],
