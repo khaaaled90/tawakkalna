@@ -109,7 +109,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                       ),
                       Positioned(
                         right: 22,
-                        top: _expandedHeight - 90,
+                        top: _expandedHeight - 85,
                         child: Container(
                           width: 96,
                           height: 96,
@@ -147,7 +147,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
-                                  'رائد إبراهيم',
+                                  'علاء باعارمه',
                                   style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.w600,
@@ -160,7 +160,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                             Row(
                               children: [
                                 const Text(
-                                  'رقم الهوية: 1082319755',
+                                  'رقم الهوية: 1048322919',
                                   style: TextStyle(
                                     fontSize: 18,
                                     color: Colors.black87,
@@ -193,7 +193,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                     ),
                                     const SizedBox(height: 10),
                                     _statBoxWithImage(
-                                      '1992-04-17',
+                                      '1982-05-23',
                                       'assets/v222.png',
                                     ),
                                   ],
@@ -335,7 +335,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                           ),
                                           SizedBox(height: 2),
                                           Text(
-                                            "+966561226355",
+                                            "966596088194+",
                                             style: TextStyle(
                                               fontSize: 20,
                                               color: Colors.black54,
@@ -462,7 +462,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                             );
                           },
                         ),
-                        const SizedBox(height: 14),
+                        /*const SizedBox(height: 14),
                         _imageCard(
                           "assets/driving_license.png",
                           width: double.infinity,
@@ -474,7 +474,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                               ),
                             );
                           },
-                        ),
+                        ),*/
                       ]),
                     ),
                   ),
@@ -536,7 +536,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                 RotatedBox(
                                   quarterTurns: 3,
                                   child: Text(
-                                    "رائد بن محمد بن ابراهيم ابراهيم",
+                                    "علاء بن عمر بن سالم باعارمه",
                                     style: TextStyle(fontSize: 18, height: 1.3),
                                   ),
                                 ),
@@ -859,10 +859,10 @@ void _showMoreSheet(BuildContext context) {
                         const SizedBox(height: 6),
                         _sheetRow(
                           label: 'رقم الهوية',
-                          value: '1082319755',
+                          value: '1048322919',
                           onCopy: () {
                             Clipboard.setData(
-                              const ClipboardData(text: '1082319755'),
+                              const ClipboardData(text: '1048322919'),
                             );
                             Navigator.of(context).pop();
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -874,11 +874,11 @@ void _showMoreSheet(BuildContext context) {
                         ),
                         _sheetRow(
                           label: 'الاسم',
-                          value: 'رائد بن محمد بن ابراهيم ابراهيم',
+                          value: 'علاء بن عمر بن سالم باعارمه',
                           onCopy: () {
                             Clipboard.setData(
                               const ClipboardData(
-                                text: 'رائد بن محمد بن ابراهيم ابراهيم',
+                                text: 'علاء بن عمر بن سالم باعارمه',
                               ),
                             );
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -912,7 +912,7 @@ void _showMoreSheet(BuildContext context) {
                         ),
                         _sheetRow(
                           label: 'الحالة الاجتماعية',
-                          value: 'متزوج',
+                          value: 'اعزب',
                           onCopy: () {
                             Clipboard.setData(
                               const ClipboardData(text: 'متزوج'),
@@ -958,10 +958,10 @@ void _showMoreSheet(BuildContext context) {
                         ),
                         _sheetRow(
                           label: 'رقم التواصل الشخصي',
-                          value: '+966561226355',
+                          value: '966596088194+',
                           onCopy: () {
                             Clipboard.setData(
-                              const ClipboardData(text: '+966561226355'),
+                              const ClipboardData(text: '966596088194+'),
                             );
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
@@ -1092,39 +1092,54 @@ void _showNationalAddressSheet(BuildContext context) {
                             _infoRow(
                               context,
                               title: "العنوان المختصر",
-                              value: "NAF2471",
+                              value: "MDHA2300",
                             ),
                             _divider1(),
                             _infoRow(
                               context,
                               title: "رقم المبنى",
-                              value: "2471",
+                              value: "2300",
                             ),
                             _divider1(),
-                            _infoRow(context, title: "الحي", value: "النسيم"),
+                            _infoRow(
+                              context,
+                              title: "الحي",
+                              value: "حي الحديبية",
+                            ),
                             _divider1(),
                             _infoRow(
                               context,
                               title: "الرمز الاضافي",
-                              value: "4397",
+                              value: "8555",
                             ),
                             _divider1(),
                             _infoRow(
                               context,
                               title: "الرمز البريدي",
-                              value: "22343",
+                              value: "24336",
                             ),
                             _divider1(),
-                            _infoRow(context, title: "الشارع", value: "الثقة"),
+                            _infoRow(
+                              context,
+                              title: "الشارع",
+                              value: "شارع 346 الحديبية 1",
+                            ),
                             _divider1(),
-                            _infoRow(context, title: "المدينة", value: "جدة"),
+                            _infoRow(
+                              context,
+                              title: "المدينة",
+                              value: "مكة المكرمة",
+                            ),
                             const SizedBox(height: 8),
                             Padding(
                               padding: const EdgeInsets.symmetric(vertical: 12),
                               child: ElevatedButton.icon(
                                 onPressed: () {
                                   Clipboard.setData(
-                                    const ClipboardData(text: "NAF2471"),
+                                    const ClipboardData(
+                                      text:
+                                          "https://maps.app.goo.gl/HJH4m7taSNTfdhn9A",
+                                    ),
                                   );
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(

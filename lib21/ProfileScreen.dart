@@ -56,9 +56,7 @@ class _ProfileScreenState extends State<ProfileScreen>
 
                     // ===== طبقة تعتيم خفيفة =====
                     Positioned.fill(
-                      child: Container(
-                        color: Colors.black.withOpacity(0.25),
-                      ),
+                      child: Container(color: Colors.black.withOpacity(0.25)),
                     ),
 
                     // ===== عنوان + أزرار =====
@@ -75,7 +73,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                               fontSize: 32,
                               fontWeight: FontWeight.w700,
                               shadows: [
-                                Shadow(blurRadius: 6, color: Colors.black45)
+                                Shadow(blurRadius: 6, color: Colors.black45),
                               ],
                             ),
                           ),
@@ -98,7 +96,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(30),
                           boxShadow: [
-                            BoxShadow(color: Colors.black26, blurRadius: 8)
+                            BoxShadow(color: Colors.black26, blurRadius: 8),
                           ],
                         ),
                         padding: EdgeInsets.symmetric(horizontal: 18),
@@ -108,7 +106,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                               child: Text(
                                 'ابحث في معلوماتي',
                                 style: TextStyle(
-                                    color: Colors.black54, fontSize: 16),
+                                  color: Colors.black54,
+                                  fontSize: 16,
+                                ),
                               ),
                             ),
                             Icon(Icons.search, color: Colors.black54),
@@ -128,7 +128,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                           shape: BoxShape.circle,
                           border: Border.all(color: Colors.white, width: 6),
                           boxShadow: [
-                            BoxShadow(color: Colors.black26, blurRadius: 8)
+                            BoxShadow(color: Colors.black26, blurRadius: 8),
                           ],
                           image: DecorationImage(
                             image: AssetImage('assets/avatar.png'),
@@ -146,9 +146,7 @@ class _ProfileScreenState extends State<ProfileScreen>
             SliverToBoxAdapter(
               child: Container(
                 width: double.infinity,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                ),
+                decoration: const BoxDecoration(color: Colors.white),
                 child: Column(
                   children: [
                     // Spacer to push content below avatar overlap
@@ -167,7 +165,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                               Text(
                                 'فيصل قايد',
                                 style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.w600),
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                ),
                                 textAlign: TextAlign.right,
                               ),
                             ],
@@ -182,7 +182,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                               const Text(
                                 'رقم الهوية: 2120808866',
                                 style: TextStyle(
-                                    fontSize: 18, color: Colors.black87),
+                                  fontSize: 18,
+                                  color: Colors.black87,
+                                ),
                               ),
                               const Spacer(),
                               // المتابعون (يسار)
@@ -191,7 +193,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                                 child: Text(
                                   '95 المتابعون',
                                   style: TextStyle(
-                                      color: Colors.blue, fontSize: 16),
+                                    color: Colors.blue,
+                                    fontSize: 16,
+                                  ),
                                 ),
                               ),
                             ],
@@ -203,8 +207,10 @@ class _ProfileScreenState extends State<ProfileScreen>
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              _statBoxWithImage('المملكة العربية السعودية',
-                                  'assets/v333.png'),
+                              _statBoxWithImage(
+                                'المملكة العربية السعودية',
+                                'assets/v333.png',
+                              ),
                               const SizedBox(width: 12),
                               _statBoxWithImage('35', 'assets/v555.png'),
                             ],
@@ -217,7 +223,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               _statBoxWithImage(
-                                  '1992-04-17', 'assets/v222.png'),
+                                '1992-04-17',
+                                'assets/v222.png',
+                              ),
                               const SizedBox(width: 50),
                               _statBoxWithImage('+A', 'assets/v444.png'),
                             ],
@@ -240,7 +248,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                             unselectedLabelColor: Colors.black45,
                             indicatorWeight: 3,
                             labelStyle: const TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.w600),
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                            ),
                             tabs: const [
                               Tab(text: 'بياناتي'),
                               Tab(text: 'بطاقاتي'),
@@ -270,7 +280,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   // 🔵 العنوان الرئيسي
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 16, vertical: 12),
+                                      horizontal: 16,
+                                      vertical: 12,
+                                    ),
                                     child: Row(
                                       children: const [
                                         Icon(Icons.person_outline, size: 28),
@@ -278,8 +290,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                                         Text(
                                           "المعلومات الشخصية",
                                           style: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold),
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -310,18 +323,22 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   // ☎️ رقم التواصل
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 16),
+                                      horizontal: 16,
+                                    ),
                                     child: Container(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 16, vertical: 18),
+                                        horizontal: 16,
+                                        vertical: 18,
+                                      ),
                                       decoration: BoxDecoration(
                                         color: Colors.white,
                                         borderRadius: BorderRadius.circular(14),
                                         boxShadow: [
                                           BoxShadow(
-                                              color: Colors.black12,
-                                              blurRadius: 6,
-                                              offset: Offset(0, 2))
+                                            color: Colors.black12,
+                                            blurRadius: 6,
+                                            offset: Offset(0, 2),
+                                          ),
                                         ],
                                       ),
                                       child: Column(
@@ -338,8 +355,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                     Text(
                                                       "رقم التواصل الشخصي",
                                                       style: TextStyle(
-                                                          color: Colors.black54,
-                                                          fontSize: 15),
+                                                        color: Colors.black54,
+                                                        fontSize: 15,
+                                                      ),
                                                     ),
                                                     const SizedBox(height: 2),
                                                     Text(
@@ -347,9 +365,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                           TextAlign.right,
                                                       "966561226355+",
                                                       style: TextStyle(
-                                                          fontSize: 20,
-                                                          color:
-                                                              Colors.black54),
+                                                        fontSize: 20,
+                                                        color: Colors.black54,
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
@@ -371,8 +389,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                     Text(
                                                       "البريد الإلكتروني",
                                                       style: TextStyle(
-                                                          color: Colors.black54,
-                                                          fontSize: 15),
+                                                        color: Colors.black54,
+                                                        fontSize: 15,
+                                                      ),
                                                     ),
                                                     //const SizedBox(height: 1),
                                                     Text(
@@ -380,9 +399,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                           TextAlign.right,
                                                       "لا يوجد",
                                                       style: TextStyle(
-                                                          fontSize: 18,
-                                                          color:
-                                                              Colors.black54),
+                                                        fontSize: 18,
+                                                        color: Colors.black54,
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
@@ -412,27 +431,33 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   ),
 
                                   const SizedBox(height: 11),
-                                  // =======================  قسم المخالفات – السفر – الإنجازات  =======================
 
+                                  // =======================  قسم المخالفات – السفر – الإنجازات  =======================
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
+                                      horizontal: 10,
+                                    ),
                                     child: Column(
                                       children: [
                                         // 🔴 المخالفات
                                         Container(
                                           padding: const EdgeInsets.symmetric(
-                                              horizontal: 16, vertical: 16),
-                                          margin:
-                                              const EdgeInsets.only(bottom: 12),
+                                            horizontal: 16,
+                                            vertical: 16,
+                                          ),
+                                          margin: const EdgeInsets.only(
+                                            bottom: 12,
+                                          ),
                                           decoration: BoxDecoration(
                                             color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(14),
+                                            borderRadius: BorderRadius.circular(
+                                              14,
+                                            ),
                                             boxShadow: [
                                               BoxShadow(
-                                                  color: Colors.black12,
-                                                  blurRadius: 6)
+                                                color: Colors.black12,
+                                                blurRadius: 6,
+                                              ),
                                             ],
                                           ),
                                           child: Column(
@@ -441,10 +466,11 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                 textDirection:
                                                     TextDirection.rtl,
                                                 children: [
-                                                  Icon(Icons.block,
-                                                      color:
-                                                          Colors.red.shade400,
-                                                      size: 30),
+                                                  Icon(
+                                                    Icons.block,
+                                                    color: Colors.red.shade400,
+                                                    size: 30,
+                                                  ),
                                                   const SizedBox(width: 16),
                                                   Expanded(
                                                     child: Column(
@@ -455,10 +481,10 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                         Text(
                                                           "المخالفات",
                                                           style: TextStyle(
-                                                              fontSize: 17,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600),
+                                                            fontSize: 17,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                          ),
                                                         ),
                                                         SizedBox(height: 3),
                                                         Text(
@@ -466,9 +492,10 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                           textAlign:
                                                               TextAlign.right,
                                                           style: TextStyle(
-                                                              fontSize: 14,
-                                                              color: Colors
-                                                                  .black54),
+                                                            fontSize: 14,
+                                                            color:
+                                                                Colors.black54,
+                                                          ),
                                                         ),
                                                       ],
                                                     ),
@@ -476,9 +503,10 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                   Transform.rotate(
                                                     angle: 3.14, // 180 درجة
                                                     child: const Icon(
-                                                        Icons.arrow_back_ios,
-                                                        size: 18,
-                                                        color: Colors.black45),
+                                                      Icons.arrow_back_ios,
+                                                      size: 18,
+                                                      color: Colors.black45,
+                                                    ),
                                                   ),
                                                 ],
                                               ),
@@ -486,10 +514,11 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                 textDirection:
                                                     TextDirection.rtl,
                                                 children: [
-                                                  Icon(Icons.travel_explore,
-                                                      color:
-                                                          Colors.blue.shade600,
-                                                      size: 30),
+                                                  Icon(
+                                                    Icons.travel_explore,
+                                                    color: Colors.blue.shade600,
+                                                    size: 30,
+                                                  ),
                                                   const SizedBox(width: 16),
                                                   Expanded(
                                                     child: Column(
@@ -500,10 +529,10 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                         Text(
                                                           "السفر",
                                                           style: TextStyle(
-                                                              fontSize: 17,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600),
+                                                            fontSize: 17,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                          ),
                                                         ),
                                                         SizedBox(height: 3),
                                                         Text(
@@ -511,9 +540,10 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                           textAlign:
                                                               TextAlign.right,
                                                           style: TextStyle(
-                                                              fontSize: 14,
-                                                              color: Colors
-                                                                  .black54),
+                                                            fontSize: 14,
+                                                            color:
+                                                                Colors.black54,
+                                                          ),
                                                         ),
                                                       ],
                                                     ),
@@ -521,9 +551,10 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                   Transform.rotate(
                                                     angle: 3.14, // 180 درجة
                                                     child: const Icon(
-                                                        Icons.arrow_back_ios,
-                                                        size: 18,
-                                                        color: Colors.black45),
+                                                      Icons.arrow_back_ios,
+                                                      size: 18,
+                                                      color: Colors.black45,
+                                                    ),
                                                   ),
                                                 ],
                                               ),
@@ -531,10 +562,12 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                 textDirection:
                                                     TextDirection.rtl,
                                                 children: [
-                                                  Icon(Icons.military_tech,
-                                                      color:
-                                                          Colors.amber.shade700,
-                                                      size: 30),
+                                                  Icon(
+                                                    Icons.military_tech,
+                                                    color:
+                                                        Colors.amber.shade700,
+                                                    size: 30,
+                                                  ),
                                                   const SizedBox(width: 16),
                                                   Expanded(
                                                     child: Column(
@@ -545,10 +578,10 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                         Text(
                                                           "الإنجازات",
                                                           style: TextStyle(
-                                                              fontSize: 17,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600),
+                                                            fontSize: 17,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                          ),
                                                         ),
                                                         SizedBox(height: 3),
                                                         Text(
@@ -556,9 +589,10 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                           textAlign:
                                                               TextAlign.right,
                                                           style: TextStyle(
-                                                              fontSize: 14,
-                                                              color: Colors
-                                                                  .black54),
+                                                            fontSize: 14,
+                                                            color:
+                                                                Colors.black54,
+                                                          ),
                                                         ),
                                                       ],
                                                     ),
@@ -566,9 +600,10 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                   Transform.rotate(
                                                     angle: 3.14, // 180 درجة
                                                     child: const Icon(
-                                                        Icons.arrow_back_ios,
-                                                        size: 18,
-                                                        color: Colors.black45),
+                                                      Icons.arrow_back_ios,
+                                                      size: 18,
+                                                      color: Colors.black45,
+                                                    ),
                                                   ),
                                                 ],
                                               ),
@@ -594,7 +629,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   height: 210,
                                   child: ListView(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
+                                      horizontal: 10,
+                                    ),
                                     children: [
                                       _imageCard(
                                         "assets/id_card.png",
@@ -603,8 +639,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (_) =>
-                                                    NationalIDScreen()),
+                                              builder: (_) =>
+                                                  NationalIDScreen(),
+                                            ),
                                           );
                                         },
                                       ),
@@ -616,8 +653,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (_) =>
-                                                    DrivingDScreen()),
+                                              builder: (_) => DrivingDScreen(),
+                                            ),
                                           );
                                         },
                                       ),
@@ -787,17 +824,15 @@ class _ProfileScreenState extends State<ProfileScreen>
       padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 6),
       child: Align(
         alignment: Alignment.centerRight,
-        child: Text(text,
-            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w600)),
+        child: Text(
+          text,
+          style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+        ),
       ),
     );
   }
 
-  Widget _imageCard(
-    String asset, {
-    double width = 300,
-    VoidCallback? onTap,
-  }) {
+  Widget _imageCard(String asset, {double width = 300, VoidCallback? onTap}) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -809,10 +844,7 @@ class _ProfileScreenState extends State<ProfileScreen>
         padding: const EdgeInsets.all(4),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(12),
-          child: Image.asset(
-            asset,
-            fit: BoxFit.cover,
-          ),
+          child: Image.asset(asset, fit: BoxFit.cover),
         ),
       ),
     );
@@ -829,12 +861,7 @@ class _ProfileScreenState extends State<ProfileScreen>
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Image.asset(
-            imagePath,
-            width: 20,
-            height: 20,
-            fit: BoxFit.contain,
-          ),
+          Image.asset(imagePath, width: 20, height: 20, fit: BoxFit.contain),
           const SizedBox(width: 6),
           Text(
             label,
@@ -943,96 +970,121 @@ void _showMoreSheet(BuildContext context) {
                   Expanded(
                     //child:Directionality(
                     //textDirection: TextDirection.rtl,
-
                     child: ListView(
                       controller: scrollController,
                       children: [
                         const SizedBox(height: 6),
                         _sheetRow(
-                            label: 'رقم الهوية',
-                            value: '2120808866',
-                            onCopy: () {
-                              Clipboard.setData(
-                                  const ClipboardData(text: '2120808866'));
-                              Navigator.of(context).pop();
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text('تم نسخ رقم الهوية')),
-                              );
-                            }),
+                          label: 'رقم الهوية',
+                          value: '2120808866',
+                          onCopy: () {
+                            Clipboard.setData(
+                              const ClipboardData(text: '2120808866'),
+                            );
+                            Navigator.of(context).pop();
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('تم نسخ رقم الهوية'),
+                              ),
+                            );
+                          },
+                        ),
                         _sheetRow(
-                            label: 'الاسم',
-                            value: 'فيصل عبدالله عبده قايد',
-                            onCopy: () {
-                              Clipboard.setData(const ClipboardData(
-                                  text: 'فيصل عبدالله عبده قايد'));
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content: Text('تم نسخ الاسم')));
-                            }),
+                          label: 'الاسم',
+                          value: 'فيصل عبدالله عبده قايد',
+                          onCopy: () {
+                            Clipboard.setData(
+                              const ClipboardData(
+                                text: 'فيصل عبدالله عبده قايد',
+                              ),
+                            );
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('تم نسخ الاسم')),
+                            );
+                          },
+                        ),
                         _sheetRow(
-                            label: 'الجنسية',
-                            value: 'اليمن',
-                            onCopy: () {
-                              Clipboard.setData(const ClipboardData(
-                                  text: 'اليمن'));
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('تم النسخ')));
-                            }),
+                          label: 'الجنسية',
+                          value: 'اليمن',
+                          onCopy: () {
+                            Clipboard.setData(
+                              const ClipboardData(text: 'اليمن'),
+                            );
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('تم النسخ')),
+                            );
+                          },
+                        ),
                         _sheetRow(
-                            label: 'مكان الميلاد',
-                            value: 'جدة',
-                            onCopy: () {
-                              Clipboard.setData(
-                                  const ClipboardData(text: 'جدة'));
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('تم النسخ')));
-                            }),
+                          label: 'مكان الميلاد',
+                          value: 'جدة',
+                          onCopy: () {
+                            Clipboard.setData(const ClipboardData(text: 'جدة'));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('تم النسخ')),
+                            );
+                          },
+                        ),
                         _sheetRow(
-                            label: 'الحالة الاجتماعية',
-                            value: 'اعزب',
-                            onCopy: () {
-                              Clipboard.setData(
-                                  const ClipboardData(text: 'اعزب'));
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('تم النسخ')));
-                            }),
+                          label: 'الحالة الاجتماعية',
+                          value: 'اعزب',
+                          onCopy: () {
+                            Clipboard.setData(
+                              const ClipboardData(text: 'اعزب'),
+                            );
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('تم النسخ')),
+                            );
+                          },
+                        ),
                         _sheetRow(
-                            label: 'المؤهل',
-                            value: 'لا يوجد',
-                            onCopy: () {
-                              Clipboard.setData(
-                                  const ClipboardData(text: 'لا يوجد'));
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('تم النسخ')));
-                            }),
+                          label: 'المؤهل',
+                          value: 'لا يوجد',
+                          onCopy: () {
+                            Clipboard.setData(
+                              const ClipboardData(text: 'لا يوجد'),
+                            );
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('تم النسخ')),
+                            );
+                          },
+                        ),
                         _sheetRow(
-                            label: 'المهنة',
-                            value: 'مندوب مبيعات',
-                            onCopy: () {
-                              Clipboard.setData(const ClipboardData(text: '-'));
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('تم النسخ')));
-                            }),
+                          label: 'المهنة',
+                          value: 'مندوب مبيعات',
+                          onCopy: () {
+                            Clipboard.setData(const ClipboardData(text: '-'));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('تم النسخ')),
+                            );
+                          },
+                        ),
                         _sheetRow(
-                            label: 'البريد الإلكتروني',
-                            value: 'لا يوجد',
-                            onCopy: () {
-                              Clipboard.setData(
-                                  const ClipboardData(text: 'لا يوجد'));
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('تم النسخ')));
-                            }),
+                          label: 'البريد الإلكتروني',
+                          value: 'لا يوجد',
+                          onCopy: () {
+                            Clipboard.setData(
+                              const ClipboardData(text: 'لا يوجد'),
+                            );
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('تم النسخ')),
+                            );
+                          },
+                        ),
                         _sheetRow(
-                            label: 'رقم التواصل الشخصي',
-                            value: '+966561226355',
-                            onCopy: () {
-                              Clipboard.setData(
-                                  const ClipboardData(text: '+966561226355'));
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content: Text('تم نسخ رقم الجوال')));
-                            }),
+                          label: 'رقم التواصل الشخصي',
+                          value: '+966561226355',
+                          onCopy: () {
+                            Clipboard.setData(
+                              const ClipboardData(text: '+966561226355'),
+                            );
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('تم نسخ رقم الجوال'),
+                              ),
+                            );
+                          },
+                        ),
                         const SizedBox(height: 24),
                       ],
                     ),
@@ -1049,10 +1101,11 @@ void _showMoreSheet(BuildContext context) {
 }
 
 // مساعدة: صف واحد داخل الورقة (يمكن تعديله للتصميم الدقيق)
-Widget _sheetRow(
-    {required String label,
-    required String value,
-    required VoidCallback onCopy}) {
+Widget _sheetRow({
+  required String label,
+  required String value,
+  required VoidCallback onCopy,
+}) {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 8),
     child: Row(
@@ -1067,9 +1120,13 @@ Widget _sheetRow(
             children: [
               Text(label, style: const TextStyle(color: Colors.black54)),
               const SizedBox(height: 2),
-              Text(value,
-                  style: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.w700)),
+              Text(
+                value,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
             ],
           ),
         ),
@@ -1125,7 +1182,9 @@ void _showNationalAddressSheet(BuildContext context) {
                           scrollController, // مهم لربط التمرير بالـ DraggableScrollableSheet
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 15, vertical: 2),
+                          horizontal: 15,
+                          vertical: 2,
+                        ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
@@ -1137,8 +1196,9 @@ void _showNationalAddressSheet(BuildContext context) {
                                 child: Text(
                                   "العنوان الأول",
                                   style: TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold),
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                             ),
@@ -1146,8 +1206,9 @@ void _showNationalAddressSheet(BuildContext context) {
                             // شعار وصورة كبيرة
                             Center(
                               child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 1),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 1,
+                                ),
                                 child: Image.asset(
                                   "assets/address_log.png", // ضع الشعار في assets
                                   width: 450,
@@ -1160,19 +1221,31 @@ void _showNationalAddressSheet(BuildContext context) {
                             const SizedBox(height: 4),
 
                             // مثال على صفوف البيانات مع أيقونة نسخ
-                            _infoRow(context,
-                                title: "العنوان المختصر", value: "NAF2471"),
+                            _infoRow(
+                              context,
+                              title: "العنوان المختصر",
+                              value: "NAF2471",
+                            ),
                             _divider1(),
-                            _infoRow(context,
-                                title: "رقم المبنى", value: "2471"),
+                            _infoRow(
+                              context,
+                              title: "رقم المبنى",
+                              value: "2471",
+                            ),
                             _divider1(),
                             _infoRow(context, title: "الحي", value: "النسيم"),
                             _divider1(),
-                            _infoRow(context,
-                                title: "الرمز الاضافي", value: "4397"),
+                            _infoRow(
+                              context,
+                              title: "الرمز الاضافي",
+                              value: "4397",
+                            ),
                             _divider1(),
-                            _infoRow(context,
-                                title: "الرمز البريدي", value: "22343"),
+                            _infoRow(
+                              context,
+                              title: "الرمز البريدي",
+                              value: "22343",
+                            ),
                             _divider1(),
                             _infoRow(context, title: "الشارع", value: "الثقة"),
                             _divider1(),
@@ -1187,21 +1260,27 @@ void _showNationalAddressSheet(BuildContext context) {
                                   // هنا يمكن فتح دالة المشاركة (share) أو نسخ رابط
                                   // مثال بسيط: نسخ "NAF2471" إلى الحافظة
                                   Clipboard.setData(
-                                      const ClipboardData(text: "NAF2471"));
+                                    const ClipboardData(text: "NAF2471"),
+                                  );
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
-                                        content: Text("تم نسخ العنوان")),
+                                      content: Text("تم نسخ العنوان"),
+                                    ),
                                   );
                                 },
-                                icon: const Icon(Icons.share,
-                                    color: Colors.white),
+                                icon: const Icon(
+                                  Icons.share,
+                                  color: Colors.white,
+                                ),
                                 label: const Padding(
                                   padding: EdgeInsets.symmetric(vertical: 14),
-                                  child: Text("مشاركة عنوانك",
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.white,
-                                      )),
+                                  child: Text(
+                                    "مشاركة عنوانك",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.white,
+                                    ),
+                                  ),
                                 ),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.black,
@@ -1228,14 +1307,18 @@ void _showNationalAddressSheet(BuildContext context) {
   );
 }
 
-Widget _infoRow(BuildContext context,
-    {required String title, required String value}) {
+Widget _infoRow(
+  BuildContext context, {
+  required String title,
+  required String value,
+}) {
   return InkWell(
     onTap: () {
       // نسخ القيمة عند النقر على الصف بالكامل (اختياري)
       Clipboard.setData(ClipboardData(text: value));
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("تم نسخ القيمة")));
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("تم نسخ القيمة")));
     },
     child: Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
@@ -1248,12 +1331,18 @@ Widget _infoRow(BuildContext context,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title,
-                    style: const TextStyle(fontSize: 14, color: Colors.grey)),
+                Text(
+                  title,
+                  style: const TextStyle(fontSize: 14, color: Colors.grey),
+                ),
                 const SizedBox(height: 3),
-                Text(value,
-                    style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.bold)),
+                Text(
+                  value,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ],
             ),
           ),
@@ -1261,8 +1350,9 @@ Widget _infoRow(BuildContext context,
           IconButton(
             onPressed: () {
               Clipboard.setData(ClipboardData(text: value));
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(const SnackBar(content: Text("تم نسخ القيمة")));
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(const SnackBar(content: Text("تم نسخ القيمة")));
             },
             icon: const Icon(Icons.copy_outlined, size: 26),
             color: Colors.grey[700],

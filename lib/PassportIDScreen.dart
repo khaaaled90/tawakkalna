@@ -48,14 +48,15 @@ class PassportDetails extends StatelessWidget {
                   CircleAvatar(
                     radius: 40,
                     backgroundImage: AssetImage(
-                        'assets/avatar.png'), // ضع الصورة الافتراضية هنا
+                      'assets/avatar.png',
+                    ), // ضع الصورة الافتراضية هنا
                   ),
                 ],
               ),
               const SizedBox(height: 20),
 
               const SizedBox(height: 4),
-              _item('الاسم', 'رائد بن محمد بن إبراهيم إبراهيم'),
+              _item('الاسم', 'علاء بن عمر بن سالم باعارمه'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
               _item('الجنسية', 'المملكة العربية السعودية'),
@@ -69,7 +70,7 @@ class PassportDetails extends StatelessWidget {
               const SizedBox(height: 4),
               _item('نوع الجواز', 'عادي'),
               Container(height: 1, color: Colors.white24),
-              _item('تاريخ الميلاد', '1412/10/14'),
+              _item('تاريخ الميلاد', '1400/07/09'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
               _item('مكان الإصدار', 'جدة'),
@@ -93,23 +94,29 @@ class PassportDetails extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
-              //crossAxisAlignment: CrossAxisAlignment.start,
-
-              child: // [
-                  //const Icon(Icons.copy, color: Colors.white70, size: 22),
-                  Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(title,
-                  style: const TextStyle(color: Colors.white70, fontSize: 14)),
-              const SizedBox(height: 4),
-              Text(value,
-                  style: const TextStyle(color: Colors.white, fontSize: 16)),
-              //const SizedBox(height: 8),
-            ],
-          )
-              //],
-              ),
+            //crossAxisAlignment: CrossAxisAlignment.start,
+            child: // [
+                //const Icon(Icons.copy, color: Colors.white70, size: 22),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 14,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      value,
+                      style: const TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                    //const SizedBox(height: 8),
+                  ],
+                ),
+            //],
+          ),
           SizedBox(width: 8),
           const Icon(Icons.copy, color: Colors.white70, size: 22),
           //const SizedBox(height: 4),

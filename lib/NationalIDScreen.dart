@@ -24,21 +24,21 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
 
   // بيانات وهمية كما في الصورة — عدّلها إن أحببت
   final Map<String, String> leftData = {
-    'الرقم/IN Number': '1082319755',
-    'الاسم بالانجليزي/Name': 'IBRAHIM, RAED MUHAMMED I',
-    'تاريخ الميلاد/Date Of Birth': '17/04/1992',
-    'تاريخ الاصدار/Date Issue': '14/07/2017',
-    'تاريخ الانتهاء بالهجري/Expire Date in Hijri': '1450/09/18هـ',
+    'الرقم/IN Number': '1048322919',
+    'الاسم بالانجليزي/Name': 'BAARMAH, ALAA OMER S',
+    'تاريخ الميلاد/Date Of Birth': '23/05/1980',
+    'تاريخ الاصدار/Date Issue': '15/06/2023',
+    'تاريخ الانتهاء بالهجري/Expire Date in Hijri': '1453/15/11هـ',
     '': '',
   };
 
   final Map<String, String> rightData = {
-    'الاسم/Name in Arsbic': 'رائد بن محمد بن إبراهيم إبراهيم',
+    'الاسم/Name in Arsbic': 'علاء بن عمر بن سالم باعارمه',
     'مكان الميلاد/Place Of Pirrh': 'جده',
-    'تاريخ الميلاد بالهجري/Date of': '1412/10/14هـ',
-    'رقم الهوية بالانجليزي/ID Number io': '1082319755',
-    'تاريخ الانتهاء/Expire Date': '02/02/2029',
-    'نسخة/Copy': '5',
+    'تاريخ الميلاد بالهجري/Date of': '1400/07/09هـ',
+    'رقم الهوية بالانجليزي/ID Number io': '1048322919',
+    'تاريخ الانتهاء/Expire Date': '26/02/2032',
+    'نسخة/Copy': '6',
     //'': '',
   };
 
@@ -223,7 +223,7 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
           '${now.month.toString().padLeft(2, '0')}-'
           '${now.day.toString().padLeft(2, '0')}';
 
-      final String fileName = 'الهوية_$datePart.pdf';
+      final String fileName = 'الهوية الوطنية_$datePart.pdf';
 
       // قراءة ملف PDF من assets
       final byteData = await rootBundle.load('assets/1.pdf');
@@ -822,6 +822,84 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
                   //child: //Image.asset('assets/023.png', fit: BoxFit.cover),
+                  /*child: GestureDetector(
+                    onTap: () {
+                      showGeneralDialog(
+                        context: context,
+                        barrierDismissible: true,
+                        barrierLabel: '',
+                        barrierColor: Colors.black.withOpacity(0.90),
+                        transitionDuration: const Duration(milliseconds: 350),
+                        pageBuilder: (_, __, ___) {
+                          return const SizedBox.shrink();
+                        },
+                        transitionBuilder: (context, anim, __, ___) {
+                          final scale = Tween<double>(begin: 0.3, end: 1.0)
+                              .animate(
+                                CurvedAnimation(
+                                  parent: anim,
+                                  curve: Curves.easeOutBack,
+                                ),
+                              );
+
+                          return Center(
+                            child: Opacity(
+                              opacity: anim.value,
+                              child: Transform.scale(
+                                scale: scale.value * 1.50,
+                                child: Column(
+                                  mainAxisSize: MainAxisSize
+                                      .min, // تجعل العمود يأخذ مساحة محتوياته فقط
+                                  children: [
+                                    // 1. الصورة المقلوبة (المهيأة بزاوية 90 درجة)
+                                    Transform.rotate(
+                                      angle: 1.5708, // 90 درجة
+                                      child: Image.asset(
+                                        'assets/022.png',
+                                        fit: BoxFit.contain,
+                                        // تم تقليل الارتفاع قليلاً (إلى 0.55) لترك مساحة مريحة للزر بالأسفل دون حدوث Overflow
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                            0.55,
+                                      ),
+                                    ),
+
+                                    const SizedBox(
+                                      height: 15,
+                                    ), // مسافة بين الصورة والزر
+                                    // 2. زر الإغلاق X في الأسفل
+                                    GestureDetector(
+                                      onTap: () => Navigator.of(
+                                        context,
+                                      ).pop(), // يقوم بإغلاق الدايلوج عند الضغط عليه
+                                      child: Container(
+                                        padding: const EdgeInsets.all(10),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white.withOpacity(
+                                            0.2,
+                                          ), // خلفية دائرية شبه شفافة ليكون الزر واضحاً
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: const Icon(
+                                          Icons.close,
+                                          color: Colors.white,
+                                          size: 20,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Image.asset('assets/022.png', fit: BoxFit.cover),
+                    ),
+                  ),*/
                   child: GestureDetector(
                     onTap: () {
                       showGeneralDialog(
@@ -1071,34 +1149,34 @@ class _NationalIDScreenState extends State<NationalIDScreen> {
               const SizedBox(height: 20),
 
               // عناصر المعلومات (عرض سريع بدون التكرار الكامل لأن الورقة الكاملة داخل الـ sheet)
-              _item('نسخة', '5'),
+              _item('نسخة', '6'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              _item('الاسم', 'رائد بن محمد بن إبراهيم إبراهيم'),
+              _item('الاسم', 'علاء بن عمر بن سالم باعارمه'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              _item('رقم البطاقة', '1082319755'),
+              _item('رقم البطاقة', '1048322919'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              _item('تاريخ الميلاد بالهجري', '1412/10/14هـ'),
+              _item('تاريخ الميلاد بالهجري', '1400/07/09هـ'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              _item('تاريخ الانتهاء بالهجري', '1450/09/18هـ'),
+              _item('تاريخ الانتهاء بالهجري', '1453/15/11هـ'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
               _item('مكان الميلاد', 'جده'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              _item('الاسم بالإنجليزي', 'IBRAHIM, RAED MUHAMMED I'),
+              _item('الاسم بالإنجليزي', 'BAARMAH, ALAA OMER S'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              _item('رقم الهوية بالإنجليزي', '1082319755'),
+              _item('رقم الهوية بالإنجليزي', '1048322919'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              _item('تاريخ الميلاد بالميلادي', '17/04/1992'),
+              _item('تاريخ الميلاد بالميلادي', '23/05/1980'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              _item('تاريخ الانتهاء بالميلادي', '02/02/2029'),
+              _item('تاريخ الانتهاء بالميلادي', '26/02/2032'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
 
