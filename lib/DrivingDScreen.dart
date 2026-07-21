@@ -27,8 +27,8 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
     'الاسم بالانجليزي/Name': 'IBRAHIM, RAED MUHAMMED I',
     'النوع/Type': 'خاصة',
     'تاريخ الميلاد/Date Of Birth': '17/04/1992',
-    'تاريخ الاصدار/Date Issue': '14/07/2017',
-    'تاريخ الانتهاء/Expire Date': '02/02/2029',
+    'تاريخ الاصدار/Date Issue': '14/03/2015',
+    'تاريخ الانتهاء/Expire Date': '10/12/2028',
     'فصيلة الدم/Blood type': '+O',
     '': '',
   };
@@ -41,7 +41,7 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
     'تاريخ الصدار بالهجري/Date of': 'published in hijre',
     '1440/09/18هـ': '',
     'تاريخ الانتهاء بالهجري/Expire Date in Hijri': 'Hijri',
-    '1450/09/18هـ': '',
+    '1457/07/01هـ': '',
     //'نسخة/Copy': '5',
   };
 
@@ -243,16 +243,15 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
       await file.writeAsBytes(bytes, flush: true);
 
       // مشاركة الملف
-      await Share.shareXFiles(
-        [XFile(file.path, mimeType: 'application/pdf')],
-        text: fileName,
-      );
+      await Share.shareXFiles([
+        XFile(file.path, mimeType: 'application/pdf'),
+      ], text: fileName);
     } catch (e, st) {
       debugPrint('Error exporting PDF: $e\n$st');
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('حدث خطأ أثناء التصدير: $e')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('حدث خطأ أثناء التصدير: $e')));
     }
   }
   // التقاط الـ Widget كصورة، ثم إنشاء PDF ومشاركة الملف
@@ -1062,7 +1061,7 @@ class _DrivingDScreenState extends State<DrivingDScreen> {
               _item('تاريخ الانتهاء', '10/12/2028'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
-              _item('تاريخ الانتهاء بالهجري', '1450/09/18هـ'),
+              _item('تاريخ الانتهاء بالهجري', '1457/07/01هـ'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
               _item('فصيلة الدم', 'O+'),

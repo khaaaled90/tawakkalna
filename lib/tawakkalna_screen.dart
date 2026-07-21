@@ -43,7 +43,7 @@ class TawakkalnaScreen extends StatelessWidget {
                         const SizedBox(width: 12),
                         const Expanded(
                           child: Text(
-                            "هلا علاء!\nWeather - حدد مدينتك المفضلة",
+                            "هلا رائد!\nWeather - حدد مدينتك المفضلة",
                             style: TextStyle(
                               fontSize: 16,
                               height: 1.4,
@@ -170,7 +170,7 @@ class TawakkalnaScreen extends StatelessWidget {
                             );
                           },
                         ),
-                        /*const SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         ToggleBlurCard(
                           imagePath: "assets/023.png",
                           onTap: () {
@@ -182,7 +182,7 @@ class TawakkalnaScreen extends StatelessWidget {
                             );
                           },
                         ),
-                        const SizedBox(width: 10),
+                        /*const SizedBox(width: 10),
                         ToggleBlurCard(
                           imagePath: "assets/024.png",
                           onTap: () {
@@ -505,43 +505,43 @@ class TawakkalnaScreen extends StatelessWidget {
                               _infoRow(
                                 context,
                                 title: "العنوان المختصر",
-                                value: "MDHA2300",
+                                value: "NAF2471",
                               ),
                               _divider(),
                               _infoRow(
                                 context,
                                 title: "رقم المبنى",
-                                value: "2300",
+                                value: "2471",
                               ),
                               _divider(),
                               _infoRow(
                                 context,
                                 title: "الحي",
-                                value: "حي الحديبية",
+                                value: "حي النسيم",
                               ),
                               _divider(),
                               _infoRow(
                                 context,
                                 title: "الرمز الاضافي",
-                                value: "8555",
+                                value: "4397",
                               ),
                               _divider(),
                               _infoRow(
                                 context,
                                 title: "الرمز البريدي",
-                                value: "24336",
+                                value: "22343",
                               ),
                               _divider(),
                               _infoRow(
                                 context,
                                 title: "الشارع",
-                                value: "شارع 346 الحديبية 1",
+                                value: "الثقبة",
                               ),
                               _divider(),
                               _infoRow(
                                 context, 
                                 title: "المدينة", 
-                                value: "مكة المكرمة"),
+                                value: "جدة"),
                               const SizedBox(height: 8),
 
                               // زر المشاركة الكبير
@@ -555,7 +555,11 @@ class TawakkalnaScreen extends StatelessWidget {
                                     //دالة المشاركة (share) أو نسخ رابط
                                     // مثال بسيط: نسخ "NAF2471" إلى الحافظة
                                     Clipboard.setData(
-                                      const ClipboardData(text: "https://maps.app.goo.gl/HJH4m7taSNTfdhn9A"),
+                                      const ClipboardData(
+                                        text:
+                                        "" 
+                                        //"https://maps.app.goo.gl/HJH4m7taSNTfdhn9A"
+                                        ),
                                     );
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(

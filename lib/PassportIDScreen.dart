@@ -56,7 +56,7 @@ class PassportDetails extends StatelessWidget {
               const SizedBox(height: 20),
 
               const SizedBox(height: 4),
-              _item('الاسم', 'علاء بن عمر بن سالم باعارمه'),
+              _item('الاسم', 'رائد بن محمد بت ابراهيم ابراهيم'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
               _item('الجنسية', 'المملكة العربية السعودية'),
@@ -70,7 +70,7 @@ class PassportDetails extends StatelessWidget {
               const SizedBox(height: 4),
               _item('نوع الجواز', 'عادي'),
               Container(height: 1, color: Colors.white24),
-              _item('تاريخ الميلاد', '1400/07/09'),
+              _item('تاريخ الميلاد', '1412/10/14'),
               Container(height: 1, color: Colors.white24),
               const SizedBox(height: 4),
               _item('مكان الإصدار', 'جدة'),
